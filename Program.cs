@@ -5,8 +5,75 @@
 
         public class User
         {
-            public List<int> currentSquare = new() {2, 2};
-            public List<int> previousSquare = new();
+            public List<int> currentSquare;
+            public List<int> previousSquare;
+            public User()
+            {
+                this.currentSquare = new() {2, 2};
+                this.previousSquare = new();
+            }
+
+            public void Move(char direction)
+            {
+                switch (direction)
+                {
+                    case 'D':
+                        if (currentSquare[1] + 1 != 10) // 10 = map max X
+                            currentSquare[1] += 1;
+                        else
+                            Console.WriteLine("You can't go there!");
+                        break;
+                    case 'A':
+                        if (this.currentSquare[1] != 0)
+                            this.currentSquare[1] -= 1;
+                        else
+                            Console.WriteLine("You can't go there!");
+                        break;
+                    case 'W':
+                        if (this.currentSquare[0] != 0)
+                            this.currentSquare[0] -= 1;
+                        else
+                            Console.WriteLine("You can't go there!");
+                        break;
+                    case 'S':
+                        if (this.currentSquare[0] + 1 != 10) // 10 = map max Y 
+                            this.currentSquare[0] += 1;
+                        else
+                            Console.WriteLine("You can't go there!");
+                        break;
+                }
+            }
+            
+            public void Move(char direction, int steps)
+            {
+                switch (direction)
+                {
+                    case 'D':
+                        if (this.currentSquare[1] + steps < 10) // 10 = map max X
+                            this.currentSquare[1] += steps;
+                        else
+                            Console.WriteLine("You can't go there!");
+                        break;
+                    case 'A':
+                        if (this.currentSquare[1] - steps >= 0)
+                            this.currentSquare[1] -= 1;
+                        else
+                            Console.WriteLine("You can't go there!");
+                        break;
+                    case 'W':
+                        if (this.currentSquare[0] - steps >= 0)
+                            this.currentSquare[0] -= 1;
+                        else
+                            Console.WriteLine("You can't go there!");
+                        break;
+                    case 'S':
+                        if (this.currentSquare[0] + steps < 10) // 10 = map max Y 
+                            this.currentSquare[0] += steps;
+                        else
+                            Console.WriteLine("You can't go there!");
+                        break;
+                }
+            }          
         };
 
         public class Map
@@ -53,7 +120,7 @@
                     for(int j=0; j < map[i].Count; j++)
                     {
                         if (i == playerPosition[0] && j == playerPosition[1])
-                                Console.Write("O"); // Player
+                                Console.Write("\uD83C\uDFE1"); // Player
                         else
                             Console.Write(map[i][j]);
                     }
@@ -81,7 +148,7 @@
 
         class Square
         {
-            public Square? Left { get; }
+            public Square? Value { get; }
         }
         public static void Main()
         {
@@ -95,60 +162,49 @@
 
             map.Initialize(ySize, xSize);
             map.PrintFull(player.currentSquare);
-            map.Print(player.currentSquare);
 
             while (running)
             {
-                Console.WriteLine("\nWhich direction do you want to go?\nR-Right\nU-Up\nL-Left\nD-Down\nQ-Quit\n\nExtra Options:\nM-Show full map\n");
+                Console.WriteLine("\nWhich direction do you want to go?\nD-Right\nW-Up\nA-Left\nS-Down\nQ-Quit\n\nExtra Options:\n"); //instructions
+                //if square is occupied - offer to use a shovel to clear the square
+                //if square is not occupied - offer to place a building
+                //if square is a tree - offer to cut down the tree
+                //if square is the minesman - offer to ask for a hint
                 string? userChoice = Console.ReadLine();
                 player.previousSquare = new List<int>(player.currentSquare);
-                switch (userChoice) // Probably should be player.Move(userChoice) -> Move method also assigns the current square to the variable previous square and deals with map changes
+                Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                if (userChoice == "Q")
                 {
-                    case "R":
-                        if (player.currentSquare[1] + 1 != xSize)
-                            player.currentSquare[1] += 1;
-                        else
-                            Console.WriteLine("You can't go there!");
-                        break;
-                    case "L":
-                        if (player.currentSquare[1] != 0)
-                            player.currentSquare[1] -= 1;
-                        else
-                            Console.WriteLine("You can't go there!");
-                        break;
-                    case "U":
-                        if (player.currentSquare[0] != 0)
-                            player.currentSquare[0] -= 1;
-                        else
-                            Console.WriteLine("You can't go there!");
-                        break;
-                    case "D":
-                        if (player.currentSquare[0] + 1 != ySize)
-                            player.currentSquare[0] += 1;
-                        else
-                            Console.WriteLine("You can't go there!");
-                        break;
-                    case "M":
-                        map.PrintFull(player.currentSquare);
-                        break;
-                    case "Q":
-                        running = false;
-                        break;
-                    default:
-                        Console.WriteLine("Error!");
-                        break;
+                    running = false;
+                }
+                // else if (userChoice == "M")
+                // {
+                //     map.PrintFull(player.currentSquare);
+                // }
+                else if ("WASD".Contains(userChoice) && userChoice.Length == 1)
+                {
+                    char userChoice2 = char.Parse(userChoice);
+                    player.Move(userChoice2);
+                }
+                else if (userChoice.Split().Length == 2 && "WASD".Contains(userChoice.Split()[0]))
+                {
+                    string[] split = userChoice.Split();
+                    char direction = char.Parse(split[0]);
+                    int steps = int.Parse(split[1]);
+                    player.Move(direction, steps);
+                }
+                else
+                {
+                    Console.WriteLine("Error!");
                 }
                 if (running)
                 {
-
-                    // For debugging
-                    // Console.WriteLine(player.previousSquare[0] + " " + player.previousSquare[1] + " " + player.currentSquare[0] + " " + player.currentSquare[1]);
-
                     map.Change(player.previousSquare);
-                    map.Print(player.currentSquare);
+                    map.PrintFull(player.currentSquare);
                     // map.PrintFull();
                 }
             }
         }
     }
 }
+/// 
