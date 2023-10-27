@@ -265,6 +265,7 @@ namespace WorldOfZuul
                     Console.WriteLine($"User is standing on {map.this_map[curr_row][curr_col].value}");
                 }
             }
+            // Console.WriteLine("Hello Jakub's github!");
         }
     }
 }
