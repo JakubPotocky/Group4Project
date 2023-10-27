@@ -1,43 +1,49 @@
-﻿namespace WorldOfZuul
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Security.Authentication.ExtendedProtection;
+
+namespace WorldOfZuul
 {
     public class Program
     {
 
         public class User
         {
-            public List<int> currentSquare;
-            public List<int> previousSquare;
+            public List<int> currentSquare; //coordinates (x, y)
+            public List<int> previousSquare; //coordinates (x, y)
+            private object map;
+
             public User()
             {
-                this.currentSquare = new() {2, 2};
-                this.previousSquare = new();
+                currentSquare = new() {2, 2};
+                previousSquare = new();
             }
 
             public void Move(char direction)
             {
                 switch (direction)
                 {
-                    case 'D':
+                    case 'd':
                         if (currentSquare[1] + 1 != 10) // 10 = map max X
                             currentSquare[1] += 1;
                         else
                             Console.WriteLine("You can't go there!");
                         break;
-                    case 'A':
-                        if (this.currentSquare[1] != 0)
-                            this.currentSquare[1] -= 1;
+                    case 'a':
+                        if (currentSquare[1] != 0)
+                            currentSquare[1] -= 1;
                         else
                             Console.WriteLine("You can't go there!");
                         break;
-                    case 'W':
-                        if (this.currentSquare[0] != 0)
-                            this.currentSquare[0] -= 1;
+                    case 'w':
+                        if (currentSquare[0] != 0)
+                            currentSquare[0] -= 1;
                         else
                             Console.WriteLine("You can't go there!");
                         break;
-                    case 'S':
-                        if (this.currentSquare[0] + 1 != 10) // 10 = map max Y 
-                            this.currentSquare[0] += 1;
+                    case 's':
+                        if (currentSquare[0] + 1 != 10) // 10 = map max Y 
+                            currentSquare[0] += 1;
                         else
                             Console.WriteLine("You can't go there!");
                         break;
@@ -48,27 +54,27 @@
             {
                 switch (direction)
                 {
-                    case 'D':
-                        if (this.currentSquare[1] + steps < 10) // 10 = map max X
-                            this.currentSquare[1] += steps;
+                    case 'd':
+                        if (currentSquare[1] + steps < 10) // 10 = map max X
+                            currentSquare[1] += steps;
                         else
                             Console.WriteLine("You can't go there!");
                         break;
-                    case 'A':
-                        if (this.currentSquare[1] - steps >= 0)
-                            this.currentSquare[1] -= 1;
+                    case 'a':
+                        if (currentSquare[1] - steps >= 0)
+                            currentSquare[1] -= steps;
                         else
                             Console.WriteLine("You can't go there!");
                         break;
-                    case 'W':
-                        if (this.currentSquare[0] - steps >= 0)
-                            this.currentSquare[0] -= 1;
+                    case 'w':
+                        if (currentSquare[0] - steps >= 0)
+                            currentSquare[0] -= steps;
                         else
                             Console.WriteLine("You can't go there!");
                         break;
-                    case 'S':
-                        if (this.currentSquare[0] + steps < 10) // 10 = map max Y 
-                            this.currentSquare[0] += steps;
+                    case 's':
+                        if (currentSquare[0] + steps < 10) // 10 = map max Y 
+                            currentSquare[0] += steps;
                         else
                             Console.WriteLine("You can't go there!");
                         break;
@@ -78,89 +84,143 @@
 
         public class Map
         {
-            public static List<List<string>> map = new();
+            public List<List<Square>> this_map = new(); //2d list => [[]]
                 
-            public void Print(List<int> playerPosition)
+            public void Initialize(int hor, int ver)  //2d list => [["f", ...], ...]
             {
-                Console.WriteLine();
-                for(int i = playerPosition[0] - 2; i <= playerPosition[0] + 2; i++)
+                List<int> possible_sides = new() {0, hor};
+                Random rnd = new Random();
+                int mines_side_index = rnd.Next(0,2);
+                int mines_row_index = rnd.Next(2,ver-3);
+                List<int> mines_row_list = new() {mines_row_index-2, mines_row_index-1, mines_row_index, mines_row_index+1, mines_row_index+2};
+
+                int central_tree_ver = rnd.Next(2,ver-3);
+                int central_tree_hor = rnd.Next(2,hor-3);
+
+                Console.WriteLine($"Central coords: ({central_tree_ver}, {central_tree_hor})");
+
+                List<List<int>> possible_tree_coords = new();
+                for (int possible_row=-1; possible_row<=1; possible_row++)
                 {
-                    for(int j = playerPosition[1] - 2; j <= playerPosition[1] + 2; j++)
+                    for (int possible_col=-1; possible_col<=1; possible_col++)
                     {
-                        if (i>=0 && j>=0 && i < map.Count && j < map[0].Count)
+                        List<int> curr_coord = new List<int>{central_tree_ver + possible_row, central_tree_hor + possible_col};
+                        if (possible_row != 0 || possible_col != 0)
                         {
-                            if (i == playerPosition[0] && j == playerPosition[1])
-                                map[playerPosition[0]][playerPosition[1]] = "\uD83C\uDFE1"; // Player
-                            Console.Write(map[i][j]);   
+                            possible_tree_coords.Add(curr_coord);
                         }
-                        // Adding borders
-                        else if (i<0)
+                    }
+                }
+
+                List<List<int>> tree_coords = new();
+                List<int> central_tree_coords = new(){central_tree_ver, central_tree_hor};
+                tree_coords.Add(central_tree_coords);
+                
+                for (int i = 0; i <= 3; i++)
+                {
+                    int rndTreeIndex = rnd.Next(0, possible_tree_coords.Count); //maybe add "Count()"
+                    List<int> rndTree = possible_tree_coords[rndTreeIndex];
+                    tree_coords.Add(rndTree);
+                    possible_tree_coords.RemoveAt(rndTreeIndex);
+                }
+
+                for(int row=0; row<ver; row++)
+                {
+                    this_map.Add(new List<Square>());
+                    for(int column=0; column<hor; column++)
+                    {
+                        List<int> curr_coords = new() {row, column};
+                        if(row == 0)
                         {
-                            Console.Write("_");
+                            Square square = new('w'); //water
+                            this_map[row].Add(square);
                         }
-                        else if (j<0 || j>=map[0].Count)
+                        else if(row == (ver - 1))
                         {
-                            Console.Write("|");
+                            Square square = new('t'); //tree
+                            this_map[row].Add(square);
+                        }
+                        else if(mines_row_list.Contains(row) && column == possible_sides[mines_side_index])
+                        {
+                            Square square = new('m'); // mines
+                            this_map[row].Add(square);
                         }
                         else
                         {
-                            Console.Write("-");
+                            bool found_square = false;
+                            for (int z=0; z<tree_coords.Count(); z++)
+                            {
+                                if (tree_coords[z][0] == row && tree_coords[z][1] == column)
+                                {
+                                    Square square = new('t'); // random trees
+                                    this_map[row].Add(square);
+                                    found_square = true;
+                                    break;
+                                }
+                            }
+                            if (!found_square)
+                            {
+                                Square square = new('p'); // plain
+                                this_map[row].Add(square);
+                            }
                         }
                     }
-                    Console.WriteLine();
                 }
-                Console.WriteLine();
             }
 
             public void PrintFull(List<int> playerPosition)
             {
                 Console.WriteLine();
-                for(int i=0; i < map.Count; i++)
+                for(int row=0; row < this_map.Count; row++)
                 {
-                    for(int j=0; j < map[i].Count; j++)
+                    for(int column=0; column < this_map[row].Count; column++)
                     {
-                        if (i == playerPosition[0] && j == playerPosition[1])
-                                Console.Write("\uD83C\uDFE1"); // Player
+                        if (row == playerPosition[0] && column == playerPosition[1])
+                                Console.Write("C"); // Player
                         else
-                            Console.Write(map[i][j]);
+                            Console.Write(this_map[row][column].value);
                     }
                     Console.WriteLine();
                 }
                 Console.WriteLine();
             }
 
-            public void Initialize(int hor, int ver)
+            public void Change(Square squareToChange, char newValue)
             {
-                for(int i=0; i<ver; i++)
-                {
-                    map.Add(new List<string>());
-                    for(int j=0; j<hor; j++)
-                    {
-                        map[i].Add("\u2B1B");
-                    }
-                }
+                squareToChange.changeValue('v');
             }
-            public void Change(List<int> squareToChange)
+            public void Change(List<int> squareCoords, char newValue)
             {
-                map[squareToChange[0]][squareToChange[1]] = "\uD83C\uDF3C"; // Squares, that the player has visited - later should pass in function what is in the square (house/tree/etc)
+                Square squareToChange = this_map[squareCoords[0]][squareCoords[1]];
+                squareToChange.changeValue(newValue);
             }
         }
 
-        class Square
+        public class Square
         {
-            public Square? Value { get; }
+            public char? value;
+
+            public Square(char defValue)
+            {
+                value = defValue;
+            }
+
+            public void changeValue(char newValue)
+            {
+                value = newValue;
+            }
         }
         public static void Main()
         {
             bool running = true;
             Map map = new();
-            running = true;
             User player = new();
 
             int xSize = 10;
             int ySize = 10;
 
             map.Initialize(ySize, xSize);
+            // Welcome to the game
             map.PrintFull(player.currentSquare);
 
             while (running)
@@ -170,23 +230,23 @@
                 //if square is not occupied - offer to place a building
                 //if square is a tree - offer to cut down the tree
                 //if square is the minesman - offer to ask for a hint
-                string? userChoice = Console.ReadLine();
-                player.previousSquare = new List<int>(player.currentSquare);
-                Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                if (userChoice == "Q")
+                string? userChoice = Console.ReadLine().ToLower();
+                player.previousSquare = new List<int>(player.currentSquare); // may need to be changed, because of the other options
+                Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); // for better visualization
+                if (userChoice == "q")
                 {
                     running = false;
                 }
-                // else if (userChoice == "M")
+                // else if (userChoice == "m")
                 // {
                 //     map.PrintFull(player.currentSquare);
                 // }
-                else if ("WASD".Contains(userChoice) && userChoice.Length == 1)
+                else if ("wasd".Contains(userChoice) && userChoice.Length == 1)
                 {
                     char userChoice2 = char.Parse(userChoice);
                     player.Move(userChoice2);
                 }
-                else if (userChoice.Split().Length == 2 && "WASD".Contains(userChoice.Split()[0]))
+                else if (userChoice.Split().Length == 2 && "wasd".Contains(userChoice.Split()[0]))
                 {
                     string[] split = userChoice.Split();
                     char direction = char.Parse(split[0]);
@@ -199,9 +259,10 @@
                 }
                 if (running)
                 {
-                    map.Change(player.previousSquare);
                     map.PrintFull(player.currentSquare);
-                    // map.PrintFull();
+                    int curr_row = player.currentSquare[0];
+                    int curr_col = player.currentSquare[1];
+                    Console.WriteLine($"User is standing on {map.this_map[curr_row][curr_col].value}");
                 }
             }
         }
