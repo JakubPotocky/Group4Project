@@ -9,14 +9,22 @@ namespace WorldOfZuul
 
         public class User
         {
-            public List<int> currentSquare; //coordinates (x, y)
-            public List<int> previousSquare; //coordinates (x, y)
-            private object map;
+            public List<int> currentCoords; //coordinates (x, y)
+            public Square? currentSquare; //the actual current square - the Square OBJECT
+            public Map map;
 
-            public User()
+            public User(Map map)
             {
-                currentSquare = new() {2, 2};
-                previousSquare = new();
+                currentCoords = new() {2, 2};
+                currentSquare = map.this_map[2][2];
+                this.map = map;
+            }
+            
+            public void ChangeCoords(int x, int y)
+            {
+                currentCoords[0] += y;
+                currentCoords[1] += x;
+                currentSquare = map.this_map[currentCoords[0]][currentCoords[1]];
             }
 
             public void Move(char direction)
@@ -24,26 +32,26 @@ namespace WorldOfZuul
                 switch (direction)
                 {
                     case 'd':
-                        if (currentSquare[1] + 1 != 10) // 10 = map max X
-                            currentSquare[1] += 1;
+                        if (currentCoords[1] + 1 != map.this_map[1].Count) // 10 = map max X
+                            ChangeCoords(1, 0);
                         else
                             Console.WriteLine("You can't go there!");
                         break;
                     case 'a':
-                        if (currentSquare[1] != 0)
-                            currentSquare[1] -= 1;
+                        if (currentCoords[1] != 0)
+                            ChangeCoords(-1, 0);
                         else
                             Console.WriteLine("You can't go there!");
                         break;
                     case 'w':
-                        if (currentSquare[0] != 0)
-                            currentSquare[0] -= 1;
+                        if (currentCoords[0] != 0)
+                            ChangeCoords(0, -1);
                         else
                             Console.WriteLine("You can't go there!");
                         break;
                     case 's':
-                        if (currentSquare[0] + 1 != 10) // 10 = map max Y 
-                            currentSquare[0] += 1;
+                        if (currentCoords[0] + 1 != map.this_map.Count) // 10 = map max Y 
+                            ChangeCoords(0, 1);
                         else
                             Console.WriteLine("You can't go there!");
                         break;
@@ -55,26 +63,26 @@ namespace WorldOfZuul
                 switch (direction)
                 {
                     case 'd':
-                        if (currentSquare[1] + steps < 10) // 10 = map max X
-                            currentSquare[1] += steps;
+                        if (currentCoords[1] + steps < map.this_map[1].Count) // 10 = map max X
+                            ChangeCoords(steps,0);
                         else
                             Console.WriteLine("You can't go there!");
                         break;
                     case 'a':
-                        if (currentSquare[1] - steps >= 0)
-                            currentSquare[1] -= steps;
+                        if (currentCoords[1] - steps >= 0)
+                            ChangeCoords(-steps,0);
                         else
                             Console.WriteLine("You can't go there!");
                         break;
                     case 'w':
-                        if (currentSquare[0] - steps >= 0)
-                            currentSquare[0] -= steps;
+                        if (currentCoords[0] - steps >= 0)
+                            ChangeCoords(0,-steps);
                         else
                             Console.WriteLine("You can't go there!");
                         break;
                     case 's':
-                        if (currentSquare[0] + steps < 10) // 10 = map max Y 
-                            currentSquare[0] += steps;
+                        if (currentCoords[0] + steps < map.this_map.Count) // 10 = map max Y 
+                            ChangeCoords(0, steps);
                         else
                             Console.WriteLine("You can't go there!");
                         break;
@@ -118,7 +126,7 @@ namespace WorldOfZuul
                 
                 for (int i = 0; i <= 3; i++)
                 {
-                    int rndTreeIndex = rnd.Next(0, possible_tree_coords.Count); //maybe add "Count()"
+                    int rndTreeIndex = rnd.Next(0, possible_tree_coords.Count);
                     List<int> rndTree = possible_tree_coords[rndTreeIndex];
                     tree_coords.Add(rndTree);
                     possible_tree_coords.RemoveAt(rndTreeIndex);
@@ -187,7 +195,7 @@ namespace WorldOfZuul
 
             public void Change(Square squareToChange, char newValue)
             {
-                squareToChange.changeValue('v');
+                squareToChange.changeValue(newValue);
             }
             public void Change(List<int> squareCoords, char newValue)
             {
@@ -213,15 +221,17 @@ namespace WorldOfZuul
         public static void Main()
         {
             bool running = true;
+            
             Map map = new();
-            User player = new();
-
-            int xSize = 10;
+            int xSize = 10; //10
             int ySize = 10;
 
             map.Initialize(ySize, xSize);
+
+            User player = new(map);
+
             // Welcome to the game
-            map.PrintFull(player.currentSquare);
+            map.PrintFull(player.currentCoords);
 
             while (running)
             {
@@ -231,7 +241,6 @@ namespace WorldOfZuul
                 //if square is a tree - offer to cut down the tree
                 //if square is the minesman - offer to ask for a hint
                 string? userChoice = Console.ReadLine().ToLower();
-                player.previousSquare = new List<int>(player.currentSquare); // may need to be changed, because of the other options
                 Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); // for better visualization
                 if (userChoice == "q")
                 {
@@ -259,14 +268,12 @@ namespace WorldOfZuul
                 }
                 if (running)
                 {
-                    map.PrintFull(player.currentSquare);
-                    int curr_row = player.currentSquare[0];
-                    int curr_col = player.currentSquare[1];
-                    Console.WriteLine($"User is standing on {map.this_map[curr_row][curr_col].value}");
+                    map.PrintFull(player.currentCoords);
+                    Console.WriteLine($"User is standing on {player.currentSquare.value}");
                 }
             }
-            // Console.WriteLine("Hello Jakub's github!");
         }
     }
 }
-/// 
+/// -> give more options to player that is based on current square 
+/// VALIDATE IMPUT

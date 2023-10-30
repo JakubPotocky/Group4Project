@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programming\\School\\Semester Project\\Semester 1\\Group4Project\\World of Zuul.csproj": {}
+    "D:\\Programming\\School\\Semester 1\\Semester Project\\Group4Project\\World of Zuul.csproj": {}
   },
   "projects": {
-    "D:\\Programming\\School\\Semester Project\\Semester 1\\Group4Project\\World of Zuul.csproj": {
+    "D:\\Programming\\School\\Semester 1\\Semester Project\\Group4Project\\World of Zuul.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\School\\Semester Project\\Semester 1\\Group4Project\\World of Zuul.csproj",
+        "projectUniqueName": "D:\\Programming\\School\\Semester 1\\Semester Project\\Group4Project\\World of Zuul.csproj",
         "projectName": "World of Zuul",
-        "projectPath": "D:\\Programming\\School\\Semester Project\\Semester 1\\Group4Project\\World of Zuul.csproj",
+        "projectPath": "D:\\Programming\\School\\Semester 1\\Semester Project\\Group4Project\\World of Zuul.csproj",
         "packagesPath": "C:\\Users\\pauls\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\School\\Semester Project\\Semester 1\\Group4Project\\obj\\",
+        "outputPath": "D:\\Programming\\School\\Semester 1\\Semester Project\\Group4Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pauls\\AppData\\Roaming\\NuGet\\NuGet.Config"
