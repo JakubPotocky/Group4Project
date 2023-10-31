@@ -176,7 +176,7 @@ namespace WorldOfZuul
                 }
             }
 
-            public void PrintFull(List<int> playerPosition)
+            public void Print(List<int> playerPosition)
             {
                 Console.WriteLine();
                 for(int row=0; row < this_map.Count; row++)
@@ -221,6 +221,14 @@ namespace WorldOfZuul
         public static void Main()
         {
             bool running = true;
+
+            int stepAmount = 20;
+
+            int stepCount = 0;
+
+            string[] NPCprompts = File.ReadAllLines("NPCprompts.txt");
+
+            string[] Quests = File.ReadAllLines("Quests.txt");
             
             Map map = new();
             int xSize = 10; //10
@@ -231,17 +239,28 @@ namespace WorldOfZuul
             User player = new(map);
 
             // Welcome to the game
-            map.PrintFull(player.currentCoords);
+            map.Print(player.currentCoords);
 
             while (running)
             {
-                Console.WriteLine("\nWhich direction do you want to go?\nD-Right\nW-Up\nA-Left\nS-Down\nQ-Quit\n\nExtra Options:\n"); //instructions
+                Console.WriteLine("\nWhich direction do you want to go?\nD-Right\nW-Up\nA-Left\nS-Down\nQ-Quit\n\nExtra Options:\nC-Complete a step\n"); //instructions
                 //if square is occupied - offer to use a shovel to clear the square
                 //if square is not occupied - offer to place a building
                 //if square is a tree - offer to cut down the tree
                 //if square is the minesman - offer to ask for a hint
-                string? userChoice = Console.ReadLine().ToLower();
+                string? userChoice = Console.ReadLine();
+                if (userChoice == null)
+                {
+                    Console.WriteLine("Error! The application crashed!");
+                    continue;
+                }
+                else
+                {
+                    userChoice = userChoice.ToLower();
+                }
+
                 Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); // for better visualization
+                
                 if (userChoice == "q")
                 {
                     running = false;
@@ -262,18 +281,33 @@ namespace WorldOfZuul
                     int steps = int.Parse(split[1]);
                     player.Move(direction, steps);
                 }
+                else if(userChoice == "c")
+                {
+                    if(stepCount < stepAmount)
+                    {
+                        Console.WriteLine(NPCprompts[stepCount]);
+                        stepCount++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
                 else
                 {
-                    Console.WriteLine("Error!");
+                    Console.WriteLine("Error! Incorrect input!");
                 }
                 if (running)
                 {
-                    map.PrintFull(player.currentCoords);
                     Console.WriteLine($"User is standing on {player.currentSquare.value}");
+                    Console.WriteLine($"Steps ?XD *DONT FORGET TO CHAGE THIS*: {stepCount}/{stepAmount}");
+                    Console.WriteLine($"Current quest: {Quests[stepCount]}");
+                    map.Print(player.currentCoords);
                 }
             }
         }
     }
 }
-/// -> give more options to player that is based on current square 
-/// VALIDATE IMPUT
+/// -> give more options to player that is based on current square ...
+/// VALIDATE INPUT ✔️ 
+/// 
