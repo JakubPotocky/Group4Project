@@ -13,6 +13,9 @@ namespace WorldOfZuul
             int mines_row_index = rnd.Next(3,ver-4);
             List<int> mines_row_list = new() {mines_row_index-2, mines_row_index-1, mines_row_index, mines_row_index+1, mines_row_index+2};
 
+            int mayor_spawn_ver = rnd.Next(1,ver-2);
+            int mayor_spawn_hor = rnd.Next(1,hor-2);
+
             int central_tree_ver = rnd.Next(2,ver-3);
             int central_tree_hor = rnd.Next(2,hor-3);
 
@@ -65,6 +68,12 @@ namespace WorldOfZuul
                     else
                     {
                         bool found_square = false;
+                        if (mayor_spawn_ver == row && mayor_spawn_hor == column)
+                        {
+                            Square square = new('M'); //mayor
+                            this_map[row].Add(square);
+                            found_square = true;
+                        }
                         for (int z=0; z<tree_coords.Count(); z++)
                         {
                             if (tree_coords[z][0] == row && tree_coords[z][1] == column)

@@ -14,7 +14,7 @@ namespace WorldOfZuul
 
             int stepCount = 0;
 
-            string[] NPCprompts = File.ReadAllLines("NPCprompts.txt");
+            //string[] NPCprompts = File.ReadAllLines("NPCprompts/");
 
             string[] Quests = File.ReadAllLines("Quests.txt");
             
@@ -26,8 +26,9 @@ namespace WorldOfZuul
 
             User player = new(map);
 
+            NPC Mayor = new("Mayor", MayorPrompts.Prompts);
             // Welcome to the game
-            Console.WriteLine(NPCprompts[stepCount]);
+            Console.WriteLine(Mayor.GetPrompt("Introduction"));
             map.Print(player.currentCoords);
 
             while (running)
@@ -71,7 +72,7 @@ namespace WorldOfZuul
                     if(stepCount < stepAmount)
                     {
                         stepCount++;
-                        Console.WriteLine(NPCprompts[stepCount]);
+                        Console.WriteLine(Mayor.GetPrompt($"Quest{stepCount}"));
                     }
                     else
                     {
