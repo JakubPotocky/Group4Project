@@ -14,6 +14,8 @@ namespace WorldOfZuul
 
             int stepCount = 0;
 
+            int o=0;
+
             //string[] NPCprompts = File.ReadAllLines("NPCprompts/");
 
             string[] Quests = File.ReadAllLines("Quests.txt");
@@ -33,7 +35,7 @@ namespace WorldOfZuul
 
             while (running)
             {
-                Console.WriteLine("\nWhich direction do you want to go?\nD-Right\nW-Up\nA-Left\nS-Down\nQ-Quit\n\nExtra Options:\nC-Complete a step\n"); //instructions
+                Console.WriteLine("\nWhich direction do you want to go?\nD-Right\nW-Up\nA-Left\nS-Down\nQ-Quit\n\nExtra Options:\nC-Complete a step\nL-Map Legend\n"); //instructions
                 //if square is occupied - offer to use a shovel to clear the square
                 //if square is not occupied - offer to place a building
                 //if square is a tree - offer to cut down the tree
@@ -51,11 +53,11 @@ namespace WorldOfZuul
 
                 Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); // for better visualization
                 
-                if (userChoice == "q")
+                if (userChoice == "q") //Quit Game
                 {
                     running = false;
                 }
-                else if ("wasd".Contains(userChoice) && userChoice.Length == 1)
+                else if ("wasd".Contains(userChoice) && userChoice.Length == 1) //Movement
                 {
                     char userChoice2 = char.Parse(userChoice);
                     player.Move(userChoice2);
@@ -67,7 +69,7 @@ namespace WorldOfZuul
                     int steps = int.Parse(split[1]);
                     player.Move(direction, steps);
                 }
-                else if(userChoice == "c")
+                else if(userChoice == "c") //Quests/Steps
                 {
                     if(stepCount < stepAmount)
                     {
@@ -76,8 +78,12 @@ namespace WorldOfZuul
                     }
                     else
                     {
-                        break;
+                        Console.WriteLine("Congrats on completing the game! Thank you for playing EcoCity: Building a Sustainable Future!\nScore:100/100\n");
                     }
+                }
+                else if(userChoice == "l") //Legend
+                {
+                     Console.WriteLine("Legend:\n⚐-Player\n♧-Trees\n♦-Plain\n∆-Mines\n≋-Water\n");
                 }
                 else
                 {
@@ -86,8 +92,10 @@ namespace WorldOfZuul
                 if (running)
                 {
                     Console.WriteLine($"User is standing on {player.currentSquare.value}");
-                    Console.WriteLine($"Steps ?XD *DONT FORGET TO CHAGE THIS*: {stepCount}/{stepAmount}");
-                    Console.WriteLine($"Current quest: {Quests[stepCount]}");
+                    Console.WriteLine($"Steps: {stepCount}/{stepAmount}");
+                    if ((stepCount != stepAmount) || (o==0))
+                        Console.WriteLine($"Current quest: {Quests[stepCount]}");
+                    if (stepCount == stepAmount) o=1;
                     map.Print(player.currentCoords);
                 }
             }

@@ -52,17 +52,17 @@ namespace WorldOfZuul
                     List<int> curr_coords = new() {row, column};
                     if(row == 0)
                     {
-                        Square square = new('w'); //water
+                        Square square = new('≋'); //water
                         this_map[row].Add(square);
                     }
                     else if(row == (ver - 1))
                     {
-                        Square square = new('t'); //tree
+                        Square square = new('♧'); //tree
                         this_map[row].Add(square);
                     }
                     else if(mines_row_list.Contains(row) && column == possible_sides[mines_side_index])
                     {
-                        Square square = new('m'); // mines
+                        Square square = new('∆'); // mines
                         this_map[row].Add(square);
                     }
                     else
@@ -78,7 +78,7 @@ namespace WorldOfZuul
                         {
                             if (tree_coords[z][0] == row && tree_coords[z][1] == column)
                             {
-                                Square square = new('t'); // random trees
+                                Square square = new('♧'); // random trees
                                 this_map[row].Add(square);
                                 found_square = true;
                                 break;
@@ -86,7 +86,7 @@ namespace WorldOfZuul
                         }
                         if (!found_square)
                         {
-                            Square square = new('p'); // plain
+                            Square square = new('♦'); // plain
                             this_map[row].Add(square);
                         }
                     }
@@ -102,7 +102,7 @@ namespace WorldOfZuul
                 for(int column=0; column < this_map[row].Count; column++)
                 {
                     if (row == playerPosition[0] && column == playerPosition[1])
-                            Console.Write("C"); // Player
+                            Console.Write("⚐"); // Player
                     else
                         Console.Write(this_map[row][column].value);
                 }

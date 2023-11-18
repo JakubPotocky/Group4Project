@@ -4,7 +4,7 @@ namespace WorldOfZuul
     {
         private static readonly Dictionary<string, string> _Prompts = new()
         {
-            ["Introduction"]= "The Story",
+            ["Introduction"]= "Welcome to EcoCity: Building a Sustainable Future! Your goal is to make the city as sustainable as possible. Start by exploring the map. Good luck!",
             ["Quest1"]= "Let the adventure begin! Start by giving your citizens a snug roof over their heads! We're starting with just 5 houses, but trust me, this is just the tip of the iceberg!",
             ["Quest2"]= "Time for a shopping spree! Get that grocery shop, and let the cash registers sing!",
             ["Quest3"]= "Oh no, we've got some folks out here braving the elements! Let's build 5 more houses, quick!",
