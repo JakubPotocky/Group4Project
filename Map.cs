@@ -4,17 +4,14 @@ namespace WorldOfZuul
     public class Map
     {
         public List<List<Square>> this_map = new(); //2d list => [[]]
-            
+ 
         public void Initialize(int hor, int ver)  //2d list => [["f", ...], ...]
         {
-            List<int> possible_sides = new() {0, hor};
+            List<int> possible_sides = new() {0, hor-1}; //hor-1
             Random rnd = new Random();
             int mines_side_index = rnd.Next(0,2);
-            int mines_row_index = rnd.Next(3,ver-4);
+            int mines_row_index = rnd.Next(3,ver-3);
             List<int> mines_row_list = new() {mines_row_index-2, mines_row_index-1, mines_row_index, mines_row_index+1, mines_row_index+2};
-
-            int mayor_spawn_ver = rnd.Next(1,ver-2);
-            int mayor_spawn_hor = rnd.Next(1,hor-2);
 
             int central_tree_ver = rnd.Next(2,ver-3);
             int central_tree_hor = rnd.Next(2,hor-3);
@@ -68,12 +65,6 @@ namespace WorldOfZuul
                     else
                     {
                         bool found_square = false;
-                        if (mayor_spawn_ver == row && mayor_spawn_hor == column)
-                        {
-                            Square square = new('M'); //mayor
-                            this_map[row].Add(square);
-                            found_square = true;
-                        }
                         for (int z=0; z<tree_coords.Count(); z++)
                         {
                             if (tree_coords[z][0] == row && tree_coords[z][1] == column)
@@ -92,6 +83,21 @@ namespace WorldOfZuul
                     }
                 }
             }
+
+            int mayorRow = rnd.Next(1, ver-2);
+
+            List<Square> mayorPossibleCoords = new();
+
+            for(int column=0; column < this_map[mayorRow].Count; column++)
+            {
+                Square currentSquare = this_map[mayorRow][column];
+                if (currentSquare.value == '♦')
+                {
+                    mayorPossibleCoords.Add(currentSquare);
+                }
+            }
+            int mayorSquareIndex = rnd.Next(0, mayorPossibleCoords.Count);
+            mayorPossibleCoords[mayorSquareIndex].changeValue('M');
         }
 
         public void Print(List<int> playerPosition)
@@ -101,8 +107,13 @@ namespace WorldOfZuul
             {
                 for(int column=0; column < this_map[row].Count; column++)
                 {
-                    if (row == playerPosition[0] && column == playerPosition[1])
+                    if (playerPosition != null)
+                    {
+                        if (row == playerPosition[0] && column == playerPosition[1])
                             Console.Write("⚐"); // Player
+                        else
+                            Console.Write(this_map[row][column].value);
+                    }
                     else
                         Console.Write(this_map[row][column].value);
                 }
