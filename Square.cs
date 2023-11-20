@@ -6,7 +6,7 @@ namespace WorldOfZuul
 
         public Square(char defValue)
         {
-            value = defValue;
+            this.value = defValue;
         }
 
         public void changeValue(char newValue)
