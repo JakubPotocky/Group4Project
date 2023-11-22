@@ -7,7 +7,9 @@ namespace WorldOfZuul
     public class Program
     {
         public static NPC Mayor = new("Mayor", MayorPrompts.Prompts);
+        public static NPC Miner = new("Miner", MinerPrompts.Prompts);
         public static bool mayorStart = false;
+        public static bool minerStart = false;
         public static void Main()
         {
             bool running = true;
@@ -23,6 +25,7 @@ namespace WorldOfZuul
             Map map = new();
             int xSize = 10; //10
             int ySize = 10;
+            int i=0;
 
             map.Initialize(ySize, xSize);
 
@@ -56,7 +59,7 @@ namespace WorldOfZuul
                 }
 
                 Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); // for better visualization
-                
+        
                 if (userChoice == "q") //Quit Game
                 {
                     running = false;
@@ -91,6 +94,13 @@ namespace WorldOfZuul
                 {
                     Functions.PrintMapLegend();
                 }
+                else if(minerStart && userChoice == "h" && i<3) //Hints
+                {
+                    i++;
+                    Console.WriteLine(Miner.GetPrompt($"Quest{stepCount+1}"));
+                }
+                else if(minerStart && userChoice == "h" && i>=3)
+                    Console.WriteLine(Miner.GetPrompt($"Exceed"));
                 else
                 {
                     Console.WriteLine("Error! Incorrect input!");

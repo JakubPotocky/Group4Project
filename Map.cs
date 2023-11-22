@@ -98,6 +98,21 @@ namespace WorldOfZuul
             }
             int mayorSquareIndex = rnd.Next(0, mayorPossibleCoords.Count);
             mayorPossibleCoords[mayorSquareIndex].changeValue('M');
+
+            int mineRow = rnd.Next(1, ver-2);
+
+            List<Square> minePossibleCoords = new();
+
+            for(int column=0; column < this_map[mineRow].Count; column++)
+            {
+                Square currentSquare = this_map[mineRow][column];
+                if (currentSquare.value == '♦')
+                {
+                    minePossibleCoords.Add(currentSquare);
+                }
+            }
+            int mineSquareIndex = rnd.Next(0, minePossibleCoords.Count);
+            minePossibleCoords[mineSquareIndex].changeValue('J');
         }
 
         public void Print(List<int> playerPosition)

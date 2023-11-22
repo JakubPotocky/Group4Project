@@ -1,0 +1,12 @@
+Houses: Hey there! For cozy homes with a nice view, consider placing houses near the outskirts. Leave some space between them for a neighborly feel.
+Market: The market's heart should be close to the city's pulse. Find a spot near the center or close to where folks work to keep things bustling.
+Workspace: So, friend? I suggest you build a factory on the outskirts of the city, but not too far, and not near the water, in order to avoid polluting the waters.
+City Hall: City hall, the beating heart of our town! Center it all, surrounded by the market, workplaces, and schools for a well-organized city.
+Hospital: For a healthy town, put the hospital close to the center. Quick access in emergencies, you know? It's all about keeping our folks safe and sound.
+School: Spread those schools out evenly in residential areas. Kids shouldn't travel too far. And keep them away from noisy factories for better learning conditions.
+Police Department: Keep our streets safe! Put the police department where it can cover both homes and businesses. Safety first, always!
+Park: A breath of fresh air, literally! Stick parks in residential spots. Near water or trees, if you can, for a peaceful and green touch.
+Fire Department: Fire safety matters! Place the fire department centrally, so they can reach any part of the city quickly. Close to homes and industries for quick response.
+Big Shop: Shopping time! Big shops work well near the market or commercial areas. Make 'em easy to reach for everyone in the city.
+Stadium: For some sports and leisure, build the stadium on the outskirts. Keep the noise away from homes, maybe near a park for a more relaxed vibe.
+I've spilled all I know, and I'm drawing a blank. But don't give up! Chat with others in town or explore more!

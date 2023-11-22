@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\kubak\\.nuget\\packages\\": {}
+    "C:\\Users\\stefa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kubak\\OneDrive\\Pulpit\\Semestereprojcec\\Group4Project\\World of Zuul.csproj",
+      "projectUniqueName": "C:\\Users\\stefa\\OneDrive\\Desktop\\GroupProject\\Group4Project\\World of Zuul.csproj",
       "projectName": "World of Zuul",
-      "projectPath": "C:\\Users\\kubak\\OneDrive\\Pulpit\\Semestereprojcec\\Group4Project\\World of Zuul.csproj",
-      "packagesPath": "C:\\Users\\kubak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kubak\\OneDrive\\Pulpit\\Semestereprojcec\\Group4Project\\obj\\",
+      "projectPath": "C:\\Users\\stefa\\OneDrive\\Desktop\\GroupProject\\Group4Project\\World of Zuul.csproj",
+      "packagesPath": "C:\\Users\\stefa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\stefa\\OneDrive\\Desktop\\GroupProject\\Group4Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kubak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\stefa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
