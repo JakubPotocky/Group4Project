@@ -10,26 +10,23 @@ namespace WorldOfZuul
         public static NPC Miner = new("Miner", MinerPrompts.Prompts);
         public static bool mayorStart = false;
         public static bool minerStart = false;
+        public static int stepCount = 0;
+        public static int stepAmount = 20;
+        public static bool running = true;
         public static void Main()
         {
-            bool running = true;
+  
 
-            int stepAmount = 20;
 
-            int stepCount = 0;
 
-            int wood = 0;
-
-            int stone = 0;
+            int plusWood = 5; // *5 for delete
+            int plusStone = 5;
 
             //string[] NPCprompts = File.ReadAllLines("NPCprompts/");
-
-            string[] Quests = File.ReadAllLines("Quests.txt");
             
             Map map = new();
             int xSize = 10; //10
             int ySize = 10;
-            int i=0;
             
             map.Initialize(ySize, xSize);
 
@@ -43,7 +40,8 @@ namespace WorldOfZuul
                 //create a new funciton that checks what square is player standing on and gives him choices to make
                 if (player.currentSquare.value != null)
                 {
-                    Functions.PrintUserOptions(player.currentSquare);
+                    Functions.PrintUserOptions(player);
+                    Console.WriteLine($"\nWood: {player.wood} \nStone: {player.stone}");
                 }
 
                 //instructions
@@ -82,17 +80,7 @@ namespace WorldOfZuul
                 }
                 else if(mayorStart && userChoice == "c") //Quests/Steps
                 {
-                    stepCount++;
-                    if(stepCount < stepAmount)
-                    {
-                        Console.WriteLine(Mayor.GetPrompt($"Quest{stepCount+1}"));
-                    }
-                    else
-                    {
-                        Console.WriteLine("Congrats on completing the game! Thank you for playing EcoCity: Building a Sustainable Future!\nScore:100/100\nHere's how your city looked at the end:\n");
-                        map.Print(null);
-                        running=false;
-                    }
+                    Quests.CompleteQuest(map, player, Mayor, running);
                 }
                 else if(userChoice == "l") //Legend
                 {
@@ -100,28 +88,29 @@ namespace WorldOfZuul
                 }
                 else if(userChoice == "x" && player.currentSquare.value == '♧') //cutting trees
                 {
-                    wood+=5;
+                    player.wood += plusWood;
                 }
                 else if(userChoice == "p" && player.currentSquare.value == '♧') //cutting trees permanently 
                 {
                     player.currentSquare.value = '♦';
-                    wood+=10;
+                    player.wood += plusWood*10;
                 }
-                else if(userChoice == "t" && player.currentSquare.value == '♦') //cutting trees permanently 
-                {
-                    player.currentSquare.value = '♧';
-                }
+                // else if(userChoice == "t" && player.currentSquare.value == '♦') //planting new trees 
+                // {
+                //     player.currentSquare.value = '♧';
+                // }
                 else if(userChoice == "x" && player.currentSquare.value == '∆') //mining stone
                 {
-                    stone+=10;
+                    player.stone += plusStone;
                 }
-                else if(minerStart && userChoice == "h" && i<3) //Hints
+                else if(minerStart && userChoice == "h" && player.hintsLeft>0 && mayorStart && player.currentSquare.value == '∆') //Hints
                 {
-                    i++;
-                    Console.WriteLine(Miner.GetPrompt($"Quest{stepCount+1}"));
+                    player.hintsLeft--;
+                    Console.Write(Miner.GetPrompt($"Quest{stepCount+1}"));
+                    Console.WriteLine($" You have {player.hintsLeft} hints left!");
                 }
-                else if(minerStart && userChoice == "h" && i>=3)
-                    Console.WriteLine(Miner.GetPrompt($"Exceed"));
+                else if(minerStart && userChoice == "h" && player.hintsLeft==0 && player.currentSquare.value == '∆')
+                    Console.WriteLine(Miner.GetPrompt("Exceed"));
                 else
                 {
                     Console.WriteLine("Error! Incorrect input!");
@@ -131,12 +120,10 @@ namespace WorldOfZuul
                     if(mayorStart)
                     {                                                                /// Write your name for what you vote for using in the code, deadline is end of november XD
                         Console.WriteLine($"Progress: {stepCount*100/stepAmount}%"); /// Quests: jakubP, 
-                        Console.WriteLine($"Current quest: {Quests[stepCount]}");    /// Steps:
+                        Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}");    /// Steps:
                     }
 
-                    Console.WriteLine($"Inventory");
-                    Console.WriteLine($"Wood: {wood}");
-                    Console.WriteLine($"Stone: {stone}");
+                    //printing inventory
 
                     map.Print(player.currentCoords);
                 }

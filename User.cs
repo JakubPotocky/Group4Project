@@ -4,13 +4,16 @@ namespace WorldOfZuul
 {
     public class User
     {
-        public List<int> currentCoords; //coordinates (x, y)
-        public Square? currentSquare; //the actual current square - the Square OBJECT
+        public List<int> currentCoords = new() {2, 2}; //coordinates (x, y)
+        public Square currentSquare; //the actual current square - the Square OBJECT
         public Map map;
+        public int hintsLeft = 3;
+        public Building? currentBuilding;
+        public int wood;
+        public int stone;
 
         public User(Map map)
         {
-            currentCoords = new() {2, 2};
             currentSquare = map.this_map[2][2];
             this.map = map;
         }

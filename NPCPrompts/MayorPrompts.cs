@@ -23,7 +23,7 @@ namespace WorldOfZuul
             ["Quest16"]= "Safety is key! Build a fire department to ensure our city stays lit (in a good way)!",
             ["Quest17"]= "Jobs, jobs, jobs! Let's set up some industry to keep our citizens busy and our economy thriving!",
             ["Quest18"]= "You are crashing it! New neighbors are in town, and they need a place to crash! Build 10 more houses for our growing community!",
-            ["Quest19"]= "Time for the grand finale! A big market is in order, where locals and travelers alike can shop 'til they drop!",
+            ["Quest19"]= "Time for the grand finale! A shopping hall is in order, where locals and travelers alike can shop 'til they drop!",
             ["Quest20"]= "Game on! Our citizens are sports fanatics. Create a space where they can kick, throw, and score to their heart's content!"
         };
         public static Dictionary<string, string> Prompts

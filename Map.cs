@@ -99,23 +99,23 @@ namespace WorldOfZuul
             int mayorSquareIndex = rnd.Next(0, mayorPossibleCoords.Count);
             mayorPossibleCoords[mayorSquareIndex].changeValue('M');
 
-            int mineRow = rnd.Next(3, ver-3);
+            // int mineRow = rnd.Next(3, ver-3);
 
-            List<Square> minePossibleCoords = new();
+            // List<Square> minePossibleCoords = new();
 
-            for(int column=0; column < this_map[mineRow].Count; column++)
-            {
-                Square currentSquare = this_map[mineRow][column];
-                if (currentSquare.value == '∆')
-                {
-                    minePossibleCoords.Add(currentSquare);
-                }
-            }
-            int mineSquareIndex = rnd.Next(0, minePossibleCoords.Count);
-            minePossibleCoords[mineSquareIndex].changeValue('J');
+            // for(int column=0; column < this_map[mineRow].Count; column++)
+            // {
+            //     Square currentSquare = this_map[mineRow][column];
+            //     if (currentSquare.value == '∆')
+            //     {
+            //         minePossibleCoords.Add(currentSquare);
+            //     }
+            // }
+            // int mineSquareIndex = rnd.Next(0, minePossibleCoords.Count);
+            // minePossibleCoords[mineSquareIndex].changeValue('J');
         }
 
-        public void Print(List<int> playerPosition)
+        public void Print(List<int>? playerPosition)
         {
             Console.WriteLine();
             for(int row=0; row < this_map.Count; row++)
@@ -160,17 +160,44 @@ namespace WorldOfZuul
                             Console.Write(this_map[row][column].value);
                             Console.ResetColor();
                         }
-                        else if(this_map[row][column].value=='J')
+                        else
+                            Console.Write(this_map[row][column].value);
+                    }
+                    else
+                    {
+                        if(this_map[row][column].value=='♧')
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            Console.Write(this_map[row][column].value);
+                            Console.ResetColor();
+                        }
+                        else if(this_map[row][column].value=='∆')
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                            Console.Write(this_map[row][column].value);
+                            Console.ResetColor();
+                        }
+                        else if(this_map[row][column].value=='≋')
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.Write(this_map[row][column].value);
+                            Console.ResetColor();
+                        }
+                        else if(this_map[row][column].value=='♦')
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            Console.Write(this_map[row][column].value);
+                            Console.ResetColor();
+                        }
+                        else if(this_map[row][column].value=='M')
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write(this_map[row][column].value);
                             Console.ResetColor();
                         }
                         else
-                        Console.Write(this_map[row][column].value);
+                            Console.Write(this_map[row][column].value);
                     }
-                    else
-                        Console.Write(this_map[row][column].value);
                 }
                 Console.WriteLine();
             }

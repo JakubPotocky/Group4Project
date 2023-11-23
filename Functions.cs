@@ -3,63 +3,71 @@ namespace WorldOfZuul
     public class Functions
     {
         public static void PrintMapLegend()
-        {
+        {//change this ?
             Console.WriteLine("Legend:\n⚐-Player\n♧-Trees\n♦-Plain\n∆-Mines\n≋-Water\nM-Mayor\n☖-Houses\n☗-Market\n☢-Factory\n♥-City hall\n♱-Hospital\nS-School\nP-Police department\nT-Park\nF-Fire department\n$-Big shop\nO-Stadium");
         }
-        public static bool o = false;
-        public static bool m = false;
-        public static void PrintUserOptions(Square playerSquare)
+        public static void PrintUserOptions(User player)
         { ///create inventory system +add checking inventory system here
-            bool isOnMayor = false;
-            if(playerSquare.value == 'M')
+            if(player.currentSquare.value == 'M')
             {
                 Console.WriteLine("Last City Mayor:"); 
                 Console.WriteLine(Program.Mayor.GetPrompt("Introduction"));
-                playerSquare.value = '♦';
+                Console.WriteLine();
+                Console.WriteLine(Program.Mayor.GetPrompt("Quest1"));
+                Quests.StartQuest(1, player);
+                player.currentSquare.value = '♦';
                 Program.mayorStart = true;
-                isOnMayor = true;
-                o=true;
+            }
+            if (player.currentSquare.value == '∆')
+            {
+                if (!Program.minerStart && Program.mayorStart)
+                {
+                    Console.WriteLine("Miner:");
+                    Console.WriteLine(Program.Miner.GetPrompt("Introduction"));
+                    Program.minerStart = true;
+                }
             }
 
-            bool isOnMiner = false;
-            if(playerSquare.value == 'J')
-            {
-                Console.WriteLine("Miner:"); 
-                Console.WriteLine(Program.Miner.GetPrompt("Introduction"));
-                playerSquare.value = '∆';
-                Program.minerStart = true;
-                isOnMiner = true;
-                m=true;
-            }
             Console.WriteLine("\nWhich direction do you want to go?\nD-Right\nW-Up\nA-Left\nS-Down\n\nExtra Options:\nL-Map Legend\nQ-Quit");
-
-            if (o==true)
-             Console.WriteLine("C-Complete a step\n"); 
-            else
-             Console.WriteLine(); 
-
-            if (!isOnMayor && o==true)
+            
+            if (Program.mayorStart)
             {
-                if (playerSquare.value == '♦') //And has the option to place a building (check inventory) and has the resources necessary
+                if (player.currentSquare.value == '♦' && player.currentBuilding != null) //And has the option to place a building (check inventory) and has the resources necessary
                 {   
-                    Console.WriteLine("B-Place a building"); //Later get building name from inventory and put it here (Place a {inventory.building.name})
-                    if ( !isOnMiner && m==true)
-                    Console.WriteLine("H-Hint");
+                    Console.Write($"B-Place a {player.currentBuilding.name} (Resources needed: ");
+                    if (player.currentBuilding.resources[0] > 0)
+                    {
+                        Console.Write($"{player.currentBuilding.resources[0]} Wood");
+                        if (player.currentBuilding.resources[1] > 0)
+                        {
+                            Console.Write(", ");
+                        }
+                    }
+                    if (player.currentBuilding.resources[1] > 0)
+                    {
+                        Console.Write($"{player.currentBuilding.resources[1]} Stone");
+
+                    }
+                    Console.Write(")");
                 }
                 //else if it's a building give the option to use a shovel ??????
             }
 
-            if (playerSquare.value == '♧')
+            if (player.currentSquare.value == '♧')
             {
                 Console.WriteLine("X-Cut down the trees\nP-Permanently cut down the trees");
             }
-            else if (playerSquare.value == '∆')
+            else if (player.currentSquare.value == '∆')
             {
                 Console.WriteLine("X-Mine stone");//do we display mine man ?
             }
-            else if (playerSquare.value == '♦')
+            // else if (player.currentSquare.value == '♦')
+            // {
+            //     Console.WriteLine("T-Plant trees");
+            // }
+            if(player.currentSquare.value == '∆' && player.hintsLeft != 0 && Program.minerStart)
             {
-                Console.WriteLine("T-Plant trees");
+                Console.WriteLine("H - Ask mineman for hint");
             }
         }
     }
