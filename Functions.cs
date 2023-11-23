@@ -4,7 +4,7 @@ namespace WorldOfZuul
     {
         public static void PrintMapLegend()
         {//change this ?
-            Console.WriteLine("Legend:\n⚐-Player\n♧-Trees\n♦-Plain\n∆-Mines\n≋-Water\nM-Mayor\n☖-Houses\n☗-Market\n☢-Factory\n♥-City hall\n♱-Hospital\nS-School\nP-Police department\nT-Park\nF-Fire department\n$-Big shop\nO-Stadium");
+            Console.WriteLine("Legend:\n🫅  -Player\n🌳 -Trees\n🟩 -Plain\n🏔️  -Mines\n🌊 -Water\n👔 -Mayor\n🏠 -Houses\n🏪 -Market\n🏭 -Factory\n🏛️  -City hall\n🏥 -Hospital\n🏫 -School\n🏬 -Police department\n🏞️  -Park\n🚒 -Fire department\n💸 -Big shop\n🏟️  -Stadium\n");
         }
         public static void PrintUserOptions(User player)
         { ///create inventory system +add checking inventory system here

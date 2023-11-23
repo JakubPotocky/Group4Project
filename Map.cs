@@ -126,39 +126,27 @@ namespace WorldOfZuul
                     {
                         if (row == playerPosition[0] && column == playerPosition[1])
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.Write("⚐"); // Player
-                            Console.ResetColor();
+                            Console.Write("🫅  "); // Player
                         }
                         else if(this_map[row][column].value=='♧')
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                            Console.Write(this_map[row][column].value);
-                            Console.ResetColor();
+                            Console.Write("🌳  "); 
                         }
                         else if(this_map[row][column].value=='∆')
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                            Console.Write(this_map[row][column].value);
-                            Console.ResetColor();
+                            Console.Write("🏔️  ");
                         }
                         else if(this_map[row][column].value=='≋')
                         {
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.Write(this_map[row][column].value);
-                            Console.ResetColor();
+                            Console.Write("🌊  "); 
                         }
                         else if(this_map[row][column].value=='♦')
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Console.Write(this_map[row][column].value);
-                            Console.ResetColor();
+                            Console.Write("🟩  "); 
                         }
                         else if(this_map[row][column].value=='M')
                         {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.Write(this_map[row][column].value);
-                            Console.ResetColor();
+                            Console.Write("👔  "); 
                         }
                         else
                             Console.Write(this_map[row][column].value);
@@ -167,33 +155,23 @@ namespace WorldOfZuul
                     {
                         if(this_map[row][column].value=='♧')
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                            Console.Write(this_map[row][column].value);
-                            Console.ResetColor();
+                            Console.Write("🌳  "); 
                         }
                         else if(this_map[row][column].value=='∆')
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                            Console.Write(this_map[row][column].value);
-                            Console.ResetColor();
+                            Console.Write("🏔️  ");
                         }
                         else if(this_map[row][column].value=='≋')
                         {
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.Write(this_map[row][column].value);
-                            Console.ResetColor();
+                            Console.Write("🌊  "); 
                         }
                         else if(this_map[row][column].value=='♦')
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Console.Write(this_map[row][column].value);
-                            Console.ResetColor();
+                            Console.Write("🟩  "); 
                         }
                         else if(this_map[row][column].value=='M')
                         {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.Write(this_map[row][column].value);
-                            Console.ResetColor();
+                            Console.Write("👔  "); 
                         }
                         else
                             Console.Write(this_map[row][column].value);
