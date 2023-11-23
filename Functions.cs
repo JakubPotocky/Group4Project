@@ -37,7 +37,7 @@ namespace WorldOfZuul
                 }
                 else if (playerSquare.value == '♧')
                 {
-                    Console.WriteLine("X-Cut down the tree\nP-Permanently cut down the tree");
+                    Console.WriteLine("X-Cut down the trees\nP-Permanently cut down the trees");
                 }
                 else if (playerSquare.value == '∆')
                 {

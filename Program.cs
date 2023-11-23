@@ -18,6 +18,10 @@ namespace WorldOfZuul
 
             int stepCount = 0;
 
+            int wood = 0;
+
+            int stone = 0;
+
             //string[] NPCprompts = File.ReadAllLines("NPCprompts/");
 
             string[] Quests = File.ReadAllLines("Quests.txt");
@@ -94,6 +98,21 @@ namespace WorldOfZuul
                 {
                     Functions.PrintMapLegend();
                 }
+                else if(userChoice == "x" && player.currentSquare.value == '♧') //cutting trees
+                {
+                    //player.currentSquare.value = '♦';
+                    wood+=5;
+                }
+                else if(userChoice == "p" && player.currentSquare.value == '♧') //cutting trees permanently 
+                {
+                    player.currentSquare.value = '♦';
+                    wood+=10;
+                }
+                else if(userChoice == "x" && player.currentSquare.value == '∆') //mining stone
+                {
+                    //player.currentSquare.value = '♦';
+                    stone+=10;
+                }
                 else if(minerStart && userChoice == "h" && i<3) //Hints
                 {
                     i++;
@@ -112,6 +131,10 @@ namespace WorldOfZuul
                         Console.WriteLine($"Progress: {stepCount*100/stepAmount}%"); /// Quests: jakubP, 
                         Console.WriteLine($"Current quest: {Quests[stepCount]}");    /// Steps:
                     }
+
+                    Console.WriteLine($"Wood: {wood}");
+                    Console.WriteLine($"Stone: {stone}");
+
                     map.Print(player.currentCoords);
                 }
             }
