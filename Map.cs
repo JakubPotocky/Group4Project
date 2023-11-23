@@ -99,14 +99,14 @@ namespace WorldOfZuul
             int mayorSquareIndex = rnd.Next(0, mayorPossibleCoords.Count);
             mayorPossibleCoords[mayorSquareIndex].changeValue('M');
 
-            int mineRow = rnd.Next(1, ver-2);
+            int mineRow = rnd.Next(3, ver-3);
 
             List<Square> minePossibleCoords = new();
 
             for(int column=0; column < this_map[mineRow].Count; column++)
             {
                 Square currentSquare = this_map[mineRow][column];
-                if (currentSquare.value == '♦')
+                if (currentSquare.value == '∆')
                 {
                     minePossibleCoords.Add(currentSquare);
                 }

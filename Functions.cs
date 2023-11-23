@@ -22,7 +22,7 @@ namespace WorldOfZuul
             if(playerSquare.value == 'J')
             {
                 Console.WriteLine(Program.Miner.GetPrompt("Introduction"));
-                playerSquare.value = '♦';
+                playerSquare.value = '∆';
                 Program.minerStart = true;
                 isOnMiner = true;
             }
