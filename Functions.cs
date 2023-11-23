@@ -57,6 +57,10 @@ namespace WorldOfZuul
             {
                 Console.WriteLine("X-Mine stone");//do we display mine man ?
             }
+            else if (playerSquare.value == '♦')
+            {
+                Console.WriteLine("T-Plant trees");
+            }
         }
     }
 }

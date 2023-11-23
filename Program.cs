@@ -100,7 +100,6 @@ namespace WorldOfZuul
                 }
                 else if(userChoice == "x" && player.currentSquare.value == '♧') //cutting trees
                 {
-                    //player.currentSquare.value = '♦';
                     wood+=5;
                 }
                 else if(userChoice == "p" && player.currentSquare.value == '♧') //cutting trees permanently 
@@ -108,9 +107,12 @@ namespace WorldOfZuul
                     player.currentSquare.value = '♦';
                     wood+=10;
                 }
+                else if(userChoice == "t" && player.currentSquare.value == '♦') //cutting trees permanently 
+                {
+                    player.currentSquare.value = '♧';
+                }
                 else if(userChoice == "x" && player.currentSquare.value == '∆') //mining stone
                 {
-                    //player.currentSquare.value = '♦';
                     stone+=10;
                 }
                 else if(minerStart && userChoice == "h" && i<3) //Hints
@@ -132,6 +134,7 @@ namespace WorldOfZuul
                         Console.WriteLine($"Current quest: {Quests[stepCount]}");    /// Steps:
                     }
 
+                    Console.WriteLine($"Inventory");
                     Console.WriteLine($"Wood: {wood}");
                     Console.WriteLine($"Stone: {stone}");
 
