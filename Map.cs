@@ -125,9 +125,49 @@ namespace WorldOfZuul
                     if (playerPosition != null)
                     {
                         if (row == playerPosition[0] && column == playerPosition[1])
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write("⚐"); // Player
-                        else
+                            Console.ResetColor();
+                        }
+                        else if(this_map[row][column].value=='♧')
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
                             Console.Write(this_map[row][column].value);
+                            Console.ResetColor();
+                        }
+                        else if(this_map[row][column].value=='∆')
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                            Console.Write(this_map[row][column].value);
+                            Console.ResetColor();
+                        }
+                        else if(this_map[row][column].value=='≋')
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.Write(this_map[row][column].value);
+                            Console.ResetColor();
+                        }
+                        else if(this_map[row][column].value=='♦')
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            Console.Write(this_map[row][column].value);
+                            Console.ResetColor();
+                        }
+                        else if(this_map[row][column].value=='M')
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write(this_map[row][column].value);
+                            Console.ResetColor();
+                        }
+                        else if(this_map[row][column].value=='J')
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write(this_map[row][column].value);
+                            Console.ResetColor();
+                        }
+                        else
+                        Console.Write(this_map[row][column].value);
                     }
                     else
                         Console.Write(this_map[row][column].value);
