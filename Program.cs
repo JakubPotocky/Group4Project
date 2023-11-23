@@ -30,7 +30,7 @@ namespace WorldOfZuul
             int xSize = 10; //10
             int ySize = 10;
             int i=0;
-
+            
             map.Initialize(ySize, xSize);
 
             User player = new(map);
