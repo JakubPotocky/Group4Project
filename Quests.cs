@@ -25,7 +25,6 @@ namespace WorldOfZuul
             ["Quest19"]= "Build a shopping mall",
             ["Quest20"]= "Build a stadium"
         };
-
         private static readonly Dictionary<int, Building> buildingForQuest = new()
         {
             [1]= new House("House", 5, new List<int>{5,5}, 5, 10),
