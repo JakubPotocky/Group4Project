@@ -68,3 +68,17 @@ C:\Users\stefa\OneDrive\Desktop\Project\Group4Project\obj\Debug\net7.0\refint\Wo
 C:\Users\stefa\OneDrive\Desktop\Project\Group4Project\obj\Debug\net7.0\World of Zuul.pdb
 C:\Users\stefa\OneDrive\Desktop\Project\Group4Project\obj\Debug\net7.0\World of Zuul.genruntimeconfig.cache
 C:\Users\stefa\OneDrive\Desktop\Project\Group4Project\obj\Debug\net7.0\ref\World of Zuul.dll
+C:\Programming\School\Semester Project\Group4Project\bin\Debug\net7.0\World of Zuul.exe
+C:\Programming\School\Semester Project\Group4Project\bin\Debug\net7.0\World of Zuul.deps.json
+C:\Programming\School\Semester Project\Group4Project\bin\Debug\net7.0\World of Zuul.runtimeconfig.json
+C:\Programming\School\Semester Project\Group4Project\bin\Debug\net7.0\World of Zuul.dll
+C:\Programming\School\Semester Project\Group4Project\bin\Debug\net7.0\World of Zuul.pdb
+C:\Programming\School\Semester Project\Group4Project\obj\Debug\net7.0\World of Zuul.GeneratedMSBuildEditorConfig.editorconfig
+C:\Programming\School\Semester Project\Group4Project\obj\Debug\net7.0\World of Zuul.AssemblyInfoInputs.cache
+C:\Programming\School\Semester Project\Group4Project\obj\Debug\net7.0\World of Zuul.AssemblyInfo.cs
+C:\Programming\School\Semester Project\Group4Project\obj\Debug\net7.0\World of Zuul.csproj.CoreCompileInputs.cache
+C:\Programming\School\Semester Project\Group4Project\obj\Debug\net7.0\World of Zuul.dll
+C:\Programming\School\Semester Project\Group4Project\obj\Debug\net7.0\refint\World of Zuul.dll
+C:\Programming\School\Semester Project\Group4Project\obj\Debug\net7.0\World of Zuul.pdb
+C:\Programming\School\Semester Project\Group4Project\obj\Debug\net7.0\World of Zuul.genruntimeconfig.cache
+C:\Programming\School\Semester Project\Group4Project\obj\Debug\net7.0\ref\World of Zuul.dll

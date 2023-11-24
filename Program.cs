@@ -111,6 +111,19 @@ namespace WorldOfZuul
                 }
                 else if(minerStart && userChoice == "h" && player.hintsLeft==0 && player.currentSquare.value == '∆')
                     Console.WriteLine(Miner.GetPrompt("Exceed"));
+                else if(userChoice == "b" && player.currentBuilding != null)
+                {
+                    if (player.wood >= player.currentBuilding.resources[0] && player.stone >= player.currentBuilding.resources[1])
+                    {
+                        player.currentSquare.value = player.currentBuilding.symbol;
+                        player.wood -= player.currentBuilding.resources[0];
+                        player.stone -= player.currentBuilding.resources[1];
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not enough resources!");
+                    }
+                }
                 else
                 {
                     Console.WriteLine("Error! Incorrect input!");
@@ -118,12 +131,10 @@ namespace WorldOfZuul
                 if (running && stepCount<stepAmount)
                 {
                     if(mayorStart)
-                    {                                                                /// Write your name for what you vote for using in the code, deadline is end of november XD
-                        Console.WriteLine($"Progress: {stepCount*100/stepAmount}%"); /// Quests: jakubP, 
-                        Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}");    /// Steps:
+                    {
+                        Console.WriteLine($"Progress: {stepCount*100/stepAmount}%");
+                        Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}");
                     }
-
-                    //printing inventory
 
                     map.Print(player.currentCoords);
                 }

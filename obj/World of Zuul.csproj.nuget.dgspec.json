@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\stefa\\OneDrive\\Desktop\\Project\\Group4Project\\World of Zuul.csproj": {}
+    "C:\\Programming\\School\\Semester Project\\Group4Project\\World of Zuul.csproj": {}
   },
   "projects": {
-    "C:\\Users\\stefa\\OneDrive\\Desktop\\Project\\Group4Project\\World of Zuul.csproj": {
+    "C:\\Programming\\School\\Semester Project\\Group4Project\\World of Zuul.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\stefa\\OneDrive\\Desktop\\Project\\Group4Project\\World of Zuul.csproj",
+        "projectUniqueName": "C:\\Programming\\School\\Semester Project\\Group4Project\\World of Zuul.csproj",
         "projectName": "World of Zuul",
-        "projectPath": "C:\\Users\\stefa\\OneDrive\\Desktop\\Project\\Group4Project\\World of Zuul.csproj",
-        "packagesPath": "C:\\Users\\stefa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\stefa\\OneDrive\\Desktop\\Project\\Group4Project\\obj\\",
+        "projectPath": "C:\\Programming\\School\\Semester Project\\Group4Project\\World of Zuul.csproj",
+        "packagesPath": "C:\\Users\\pauls\\.nuget\\packages\\",
+        "outputPath": "C:\\Programming\\School\\Semester Project\\Group4Project\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\stefa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pauls\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
