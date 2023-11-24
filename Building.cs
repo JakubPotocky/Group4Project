@@ -7,11 +7,13 @@ namespace WorldOfZuul
     {
         public string name;
         public char symbol;
+        public int number;
         public List<int> resources;
-        public Building (string name, char symbol, List<int> resources)
+        public Building (string name, char symbol, int number, List<int> resources)
         {
             this.name = name;
             this.symbol = symbol;
+            this.number = number;
             this.resources = resources;
         }
     }
@@ -20,7 +22,7 @@ namespace WorldOfZuul
     {
         int humanCount;
         public int survivabilityIndex; //The chances of user dying are 1/survivabilityIndex
-        public House(string name, List<int> resources, int humanCount, int survivabilityIndex) : base(name, 'l', resources)
+        public House(string name, int number, List<int> resources, int humanCount, int survivabilityIndex) : base(name, 'l', number, resources)
         {
             this.humanCount = humanCount;
             this.survivabilityIndex = survivabilityIndex;
@@ -34,7 +36,7 @@ namespace WorldOfZuul
         List<int>? coordinates;
         //int workingPeople;
 
-        public Industrial(string name, char symbol, List<int> resources, int range, int impact, List<int>? coordinates/*, int workingPeople|*/) : base(name, symbol, resources)
+        public Industrial(string name, char symbol, int number, List<int> resources, int range, int impact, List<int>? coordinates/*, int workingPeople|*/) : base(name, symbol, number, resources)
         {
             this.range = range;
             this.impact = impact;

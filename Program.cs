@@ -12,13 +12,10 @@ namespace WorldOfZuul
         public static bool minerStart = false;
         public static int stepCount = 0;
         public static int stepAmount = 20;
+        public static int buildingCount = 1;
         public static bool running = true;
         public static void Main()
         {
-  
-
-
-
             int plusWood = 5; // *5 for delete
             int plusStone = 5;
 
@@ -78,10 +75,10 @@ namespace WorldOfZuul
                     int steps = int.Parse(split[1]);
                     player.Move(direction, steps);
                 }
-                else if(mayorStart && userChoice == "c") //Quests/Steps
-                {
-                    Quests.CompleteQuest(map, player, Mayor, running);
-                }
+                //else if(mayorStart && userChoice == "c") //Quests/Steps
+                //{
+                //  Quests.CompleteQuest(map, player, Mayor, running);
+                //}
                 else if(userChoice == "l") //Legend
                 {
                     Functions.PrintMapLegend();
@@ -111,18 +108,27 @@ namespace WorldOfZuul
                 }
                 else if(minerStart && userChoice == "h" && player.hintsLeft==0 && player.currentSquare.value == '∆')
                     Console.WriteLine(Miner.GetPrompt("Exceed"));
-                else if(userChoice == "b" && player.currentBuilding != null)
+                else if(mayorStart && userChoice == "b" && player.currentBuilding != null && player.currentSquare.value == '♦')
                 {
-                    if (player.wood >= player.currentBuilding.resources[0] && player.stone >= player.currentBuilding.resources[1])
+                    if (buildingCount<=player.currentBuilding.number)
                     {
-                        player.currentSquare.value = player.currentBuilding.symbol;
-                        player.wood -= player.currentBuilding.resources[0];
-                        player.stone -= player.currentBuilding.resources[1];
+                        if (player.wood >= player.currentBuilding.resources[0] && player.stone >= player.currentBuilding.resources[1])
+                        {
+                            player.currentSquare.value = player.currentBuilding.symbol;
+                            player.wood -= player.currentBuilding.resources[0];
+                            player.stone -= player.currentBuilding.resources[1];
+                        }
+                        else
+                        {
+                            Console.WriteLine("Not enough resources!");
+                        }
+                    buildingCount++;
                     }
                     else
                     {
-                        Console.WriteLine("Not enough resources!");
-                    }
+                        Quests.CompleteQuest(map, player, Mayor, running);
+                        buildingCount=0;
+                    }  
                 }
                 else
                 {

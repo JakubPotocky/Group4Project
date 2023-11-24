@@ -28,26 +28,26 @@ namespace WorldOfZuul
 
         private static readonly Dictionary<int, Building> buildingForQuest = new()
         {
-            [1]= new House("House", new List<int>{5,5}, 5, 10),
-            [2]= new Industrial("Market", 'm', new List<int>{5,5}, 5, 5, null),
-            [3]= new House("House", new List<int>{5,5}, 5, 10),
-            [4]= new Industrial("Workspace", 'w', new List<int>{5,5}, 5, 5, null),
-            [5]= new House("House", new List<int>{5,5}, 5, 10),
-            [6]= new Industrial("Market", 'm', new List<int>{5,5}, 5, 5, null),
-            [7]= new Industrial("City hall", 't', new List<int>{5,5}, 5, 5, null),
-            [8]= new House("House",new List<int>{5,5}, 5, 10),
-            [9]= new Industrial("Hospital", 'h', new List<int>{5,5}, 5, 5, null),
-            [10]= new House("House", new List<int>{5,5}, 5, 10),
-            [11]= new Industrial("School", 'e', new List<int>{5,5}, 5, 5, null),
-            [12]= new Industrial("Market", 'm', new List<int>{5,5}, 5, 5, null),
-            [13]= new Industrial("Police department", 'p', new List<int>{5,5}, 5, 5, null),
-            [14]= new Industrial("Park", 'c', new List<int>{5,5}, 5, 5, null),
-            [15]= new House("House", new List<int>{5,5}, 5, 10),
-            [16]= new Industrial("Fire Department", 'f', new List<int>{5,5}, 5, 5, null),
-            [17]= new Industrial("Workspace", 'w', new List<int>{5,5}, 5, 5, null),
-            [18]= new House("House", new List<int>{5,5}, 5, 10),
-            [19]= new Industrial("Shopping mall", 'b', new List<int>{5,5}, 5, 5, null),
-            [20]= new Industrial("Stadium", 's', new List<int>{5,5}, 5, 5, null)
+            [1]= new House("House", 5, new List<int>{5,5}, 5, 10),
+            [2]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 5, 5, null),
+            [3]= new House("House", 5, new List<int>{5,5}, 5, 10),
+            [4]= new Industrial("Workspace", 'w', 1, new List<int>{5,5}, 5, 5, null),
+            [5]= new House("House", 5,new List<int>{5,5}, 5, 10),
+            [6]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 5, 5, null),
+            [7]= new Industrial("City hall", 't', 1, new List<int>{5,5}, 5, 5, null),
+            [8]= new House("House", 5, new List<int>{5,5}, 5, 10),
+            [9]= new Industrial("Hospital", 'h', 1, new List<int>{5,5}, 5, 5, null),
+            [10]= new House("House", 5, new List<int>{5,5}, 5, 10),
+            [11]= new Industrial("School", 'e', 1, new List<int>{5,5}, 5, 5, null),
+            [12]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 5, 5, null),
+            [13]= new Industrial("Police department", 'p', 1, new List<int>{5,5}, 5, 5, null),
+            [14]= new Industrial("Park", 'c', 1, new List<int>{5,5}, 5, 5, null),
+            [15]= new House("House", 5, new List<int>{5,5}, 5, 10),
+            [16]= new Industrial("Fire Department", 'f', 1, new List<int>{5,5}, 5, 5, null),
+            [17]= new Industrial("Workspace", 'w', 1, new List<int>{5,5}, 5, 5, null),
+            [18]= new House("House", 5, new List<int>{5,5}, 5, 10),
+            [19]= new Industrial("Shopping mall", 'b', 1, new List<int>{5,5}, 5, 5, null),
+            [20]= new Industrial("Stadium", 's', 1, new List<int>{5,5}, 5, 5, null)
         };
 
         public static Dictionary<string, string> Prompts

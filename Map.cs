@@ -217,6 +217,50 @@ namespace WorldOfZuul
                         {
                             Console.Write("👔  "); 
                         }
+                        else if(this_map[row][column].value=='l')
+                        {
+                            Console.Write("🏠  ");
+                        }
+                        else if(this_map[row][column].value=='m')
+                        {
+                            Console.Write("🏪  ");
+                        }
+                        else if(this_map[row][column].value=='w')
+                        {
+                            Console.Write("🏭  ");
+                        }
+                        else if(this_map[row][column].value=='t')
+                        {
+                            Console.Write("🏛️  ");
+                        }
+                        else if(this_map[row][column].value=='h')
+                        {
+                            Console.Write("🏥  ");
+                        }
+                        else if(this_map[row][column].value=='e')
+                        {
+                            Console.Write("🏫  ");
+                        }
+                        else if(this_map[row][column].value=='p')
+                        {
+                            Console.Write("🏬  ");
+                        }
+                        else if(this_map[row][column].value=='c')
+                        {
+                            Console.Write("🏞️  ");
+                        }
+                        else if(this_map[row][column].value=='f')
+                        {
+                            Console.Write("🚒  ");
+                        }
+                        else if(this_map[row][column].value=='b')
+                        {
+                            Console.Write("💸  ");
+                        }
+                        else if(this_map[row][column].value=='s')
+                        {
+                            Console.Write("🏟️  ");
+                        }
                         else
                             Console.Write(this_map[row][column].value);
                     }
