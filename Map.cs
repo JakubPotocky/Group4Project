@@ -88,31 +88,16 @@ namespace WorldOfZuul
 
             List<Square> mayorPossibleCoords = new();
 
-            for(int column=0; column < this_map[mayorRow].Count; column++)
+            for(int mayorColumn=0; mayorColumn < this_map[mayorRow].Count; mayorColumn++)
             {
-                Square currentSquare = this_map[mayorRow][column];
-                if (currentSquare.value == '♦')
+                Square currentSquare = this_map[mayorRow][mayorColumn];
+                if (currentSquare.value == '♦' && (playerPosition[0] != mayorRow || playerPosition[1] != mayorColumn)})
                 {
                     mayorPossibleCoords.Add(currentSquare);
                 }
             }
             int mayorSquareIndex = rnd.Next(0, mayorPossibleCoords.Count);
             mayorPossibleCoords[mayorSquareIndex].changeValue('M');
-
-            // int mineRow = rnd.Next(3, ver-3);
-
-            // List<Square> minePossibleCoords = new();
-
-            // for(int column=0; column < this_map[mineRow].Count; column++)
-            // {
-            //     Square currentSquare = this_map[mineRow][column];
-            //     if (currentSquare.value == '∆')
-            //     {
-            //         minePossibleCoords.Add(currentSquare);
-            //     }
-            // }
-            // int mineSquareIndex = rnd.Next(0, minePossibleCoords.Count);
-            // minePossibleCoords[mineSquareIndex].changeValue('J');
         }
 
         public void Print(List<int>? playerPosition)

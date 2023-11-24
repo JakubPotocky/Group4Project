@@ -72,10 +72,11 @@ namespace WorldOfZuul
             }
             else
             {
-                Console.WriteLine("Congrats on completing the game! Thank you for playing EcoCity: Building a Sustainable Future!\nScore:100/100\nHere's how your city looked at the end:\n");
+                Console.WriteLine(MayorPrompts.GetPrompt("Goodbye"));
+                Console.WriteLine("Here's how your city looked at the end: ");
                 map.Print(null);
+                Console.WriteLine("Final score: 100/100");
                 Program.running=false;
             }
         }
     }
-}
