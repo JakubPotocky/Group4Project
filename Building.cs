@@ -55,7 +55,7 @@ namespace WorldOfZuul
                     if ((possible_row != 0 || possible_col != 0) && curr_coord[0] >= 0 && curr_coord[1] >= 0 && curr_coord[0] <= map.this_map[0].Count && curr_coord[1] <= map.this_map.Count)
                     {
                         Square curr_square = map.this_map[curr_coord[0]][curr_coord[1]];
-                        if(curr_square.value == 'h') //later chage this to the symbol for houses
+                        if(curr_square.value == 'l')
                             houseSquares.Add(curr_square);
                     }
                 }
@@ -64,12 +64,16 @@ namespace WorldOfZuul
             return houseSquares;
         }
 
-        // public void ImpactBuildings (Map map)
-        // {
-        //     foreach (Square house in FindHousesInRange(map))
-        //     {
-        //         house.survivabilityIndex += this.impact;
-        //     }
-        // }
+    public void ImpactBuildings (Map map)
+        {
+            foreach (Square house in FindHousesInRange(map))
+            {
+                if (house.obj is House && house.obj != null)
+                {
+                    House humanHouse = house.obj as House;
+                    humanHouse.survivabilityIndex += this.impact;
+                }
+            }
+     }
     }
 }
