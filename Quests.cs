@@ -71,7 +71,7 @@ namespace WorldOfZuul
             }
             else
             {
-                Console.WriteLine(MayorPrompts.GetPrompt("Goodbye"));
+                Console.WriteLine(Mayor.GetPrompt("Goodbye"));
                 Console.WriteLine("Here's how your city looked at the end: ");
                 map.Print(null);
                 Console.WriteLine("Final score: 100/100");
@@ -79,3 +79,4 @@ namespace WorldOfZuul
             }
         }
     }
+}

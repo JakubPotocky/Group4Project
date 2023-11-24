@@ -91,7 +91,7 @@ namespace WorldOfZuul
             for(int mayorColumn=0; mayorColumn < this_map[mayorRow].Count; mayorColumn++)
             {
                 Square currentSquare = this_map[mayorRow][mayorColumn];
-                if (currentSquare.value == '♦' && (playerPosition[0] != mayorRow || playerPosition[1] != mayorColumn)})
+                if (currentSquare.value == '♦' /*&& (playerPosition[0] != mayorRow || playerPosition[1] != mayorColumn)*/)
                 {
                     mayorPossibleCoords.Add(currentSquare);
                 }
