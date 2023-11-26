@@ -9,8 +9,8 @@ namespace WorldOfZuul
         public Map map;
         public int hintsLeft = 3;
         public Building? currentBuilding;
-        public int wood;
-        public int stone;
+        public int wood=100;
+        public int stone=100;
 
         public User(Map map)
         {

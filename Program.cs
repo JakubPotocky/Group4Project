@@ -12,7 +12,7 @@ namespace WorldOfZuul
         public static bool minerStart = false;
         public static int stepCount = 0;
         public static int stepAmount = 20;
-        public static int buildingCount = 1;
+        public static int buildingCount = 0;
         public static bool running = true;
         public static void Main()
         {
@@ -108,28 +108,25 @@ namespace WorldOfZuul
                 }
                 else if(minerStart && userChoice == "h" && player.hintsLeft==0 && player.currentSquare.value == '∆')
                     Console.WriteLine(Miner.GetPrompt("Exceed"));
-                else if(mayorStart && userChoice == "b" && player.currentBuilding != null && player.currentSquare.value == '♦')
+                else if(buildingCount<player.currentBuilding.number && mayorStart && userChoice == "b" && player.currentBuilding != null && player.currentSquare.value == '♦')
                 {
-                    if (buildingCount<=player.currentBuilding.number)
-                    {
-                        if (player.wood >= player.currentBuilding.resources[0] && player.stone >= player.currentBuilding.resources[1])
+                    if (player.wood >= player.currentBuilding.resources[0] && player.stone >= player.currentBuilding.resources[1])
                         {
                             player.currentSquare.value = player.currentBuilding.symbol;
-                            player.currentSquare.obj = player.currentBuilding;
                             player.wood -= player.currentBuilding.resources[0];
                             player.stone -= player.currentBuilding.resources[1];
+                            buildingCount++;
                         }
-                        else
+                    else
                         {
                             Console.WriteLine("Not enough resources!");
                         }
-                    buildingCount++;
-                    }
-                    else
+
+                    if (buildingCount==player.currentBuilding.number) 
                     {
                         Quests.CompleteQuest(map, player, Mayor, running);
                         buildingCount=0;
-                    }  
+                    }
                 }
                 else
                 {
