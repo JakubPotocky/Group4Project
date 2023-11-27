@@ -8,24 +8,31 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\pauls\\.nuget\\packages\\": {}
+    "C:\\Users\\jakub\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Programming\\School\\Semester 1\\Semester Project\\Group4Project\\World of Zuul.csproj",
+      "projectUniqueName": "C:\\Users\\jakub\\Desktop\\group project\\Group4Project\\World of Zuul.csproj",
       "projectName": "World of Zuul",
-      "projectPath": "D:\\Programming\\School\\Semester 1\\Semester Project\\Group4Project\\World of Zuul.csproj",
-      "packagesPath": "C:\\Users\\pauls\\.nuget\\packages\\",
-      "outputPath": "D:\\Programming\\School\\Semester 1\\Semester Project\\Group4Project\\obj\\",
+      "projectPath": "C:\\Users\\jakub\\Desktop\\group project\\Group4Project\\World of Zuul.csproj",
+      "packagesPath": "C:\\Users\\jakub\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jakub\\Desktop\\group project\\Group4Project\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\pauls\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\jakub\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

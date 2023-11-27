@@ -23,12 +23,4 @@ namespace WorldOfZuul
             }
         }
     }
-    
-    /*public class Mayor : NPC
-    {
-        public Mayor(string name, Dictionary<string, string> prompts) : base(name, prompts)
-        {
-
-        }
-    }*/
 }

@@ -30,64 +30,76 @@ namespace WorldOfZuul
             User player = new(map);
             // Welcome to the game
             Console.WriteLine("Welcome to EcoCity: Building a Sustainable Future! Your goal is to make the city as sustainable as possible. Start by exploring the map and finding the last city mayor. Good luck!");
+            Functions.PrintUserOptions(player);
             map.Print(player.currentCoords);
+            
+            ConsoleKeyInfo keyInfo;
 
             while (running)
             {
+                keyInfo = Console.ReadKey();
                 //create a new funciton that checks what square is player standing on and gives him choices to make
-                if (player.currentSquare.value != null)
-                {
-                    Functions.PrintUserOptions(player);
-                    Console.WriteLine($"\nWood: {player.wood} \nStone: {player.stone}");
-                }
+                Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); // for better visualization
 
                 //instructions
                 //if square is occupied - offer to use a shovel to clear the square
                 //if square is not occupied - offer to place a building
                 //if square is a tree - offer to cut down the tree
                 //if square is the minesman - offer to ask for a hint
-                string? userChoice = Console.ReadLine();
+                
+                ConsoleKey? userChoice = keyInfo.Key;
                 if (userChoice == null)
                 {
                     Console.WriteLine("Error! The application crashed!");
                     continue;
                 }
-                else
-                {
-                    userChoice = userChoice.ToLower();
-                }
-
-                Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); // for better visualization
-        
-                if (userChoice == "q") //Quit Game
+                else if (userChoice == ConsoleKey.Q) //Quit Game
                 {
                     running = false;
                 }
-                else if ("wasd".Contains(userChoice) && userChoice.Length == 1) //Movement
+
+                //here 
+
+                else if (userChoice == ConsoleKey.W || userChoice == ConsoleKey.A || userChoice == ConsoleKey.S || userChoice == ConsoleKey.D || userChoice == ConsoleKey.UpArrow || userChoice == ConsoleKey.DownArrow || userChoice == ConsoleKey.LeftArrow || userChoice == ConsoleKey.RightArrow) //Movement
                 {
-                    char userChoice2 = char.Parse(userChoice);
-                    player.Move(userChoice2);
+                    if(userChoice == ConsoleKey.W || userChoice == ConsoleKey.UpArrow)
+                    {player.Move('w');}
+                    if(userChoice == ConsoleKey.A || userChoice == ConsoleKey.LeftArrow)
+                    {player.Move('a');}
+                    if(userChoice == ConsoleKey.S || userChoice == ConsoleKey.DownArrow)
+                    {player.Move('s');}
+                    if(userChoice == ConsoleKey.D || userChoice == ConsoleKey.RightArrow)
+                    {player.Move('d');}
+                    
+                    if(!mayorStart && player.currentSquare.value == 'M')
+                    {
+                        Console.WriteLine("Last City Mayor:"); 
+                        Console.WriteLine(Program.Mayor.GetPrompt("Introduction"));
+                        Console.WriteLine();
+                        Console.WriteLine(Program.Mayor.GetPrompt("Quest1"));
+                        Quests.StartQuest(1, player);
+                        player.currentSquare.value = '♦';
+                        Program.mayorStart = true;
+                    }
+                    if (!minerStart && player.currentSquare.value == '∆')
+                    {
+                        if (!Program.minerStart && Program.mayorStart)
+                        {
+                            Console.WriteLine("Miner:");
+                            Console.WriteLine(Program.Miner.GetPrompt("Introduction"));
+                            Program.minerStart = true;
+                        }
+                    }
                 }
-                else if (userChoice.Split().Length == 2 && "wasd".Contains(userChoice.Split()[0]))
-                {
-                    string[] split = userChoice.Split();
-                    char direction = char.Parse(split[0]);
-                    int steps = int.Parse(split[1]);
-                    player.Move(direction, steps);
-                }
-                //else if(mayorStart && userChoice == "c") //Quests/Steps
-                //{
-                //  Quests.CompleteQuest(map, player, Mayor, running);
-                //}
-                else if(userChoice == "l") //Legend
+                else if(userChoice == ConsoleKey.L) //Legend
                 {
                     Functions.PrintMapLegend();
                 }
-                else if(userChoice == "x" && player.currentSquare.value == '♧') //cutting trees
+                else if(userChoice == ConsoleKey.X && player.currentSquare.value == '♧') //cutting trees
                 {
                     player.wood += plusWood;
                 }
-                else if(userChoice == "p" && player.currentSquare.value == '♧') //cutting trees permanently 
+                else if(userChoice == ConsoleKey.P && player.currentSquare.value == '♧') //cutting trees permanently 
                 {
                     player.currentSquare.value = '♦';
                     player.wood += plusWood*10;
@@ -96,34 +108,35 @@ namespace WorldOfZuul
                 // {
                 //     player.currentSquare.value = '♧';
                 // }
-                else if(userChoice == "x" && player.currentSquare.value == '∆') //mining stone
+                else if(userChoice == ConsoleKey.X && player.currentSquare.value == '∆') //mining stone
                 {
                     player.stone += plusStone;
                 }
-                else if(minerStart && userChoice == "h" && player.hintsLeft>0 && mayorStart && player.currentSquare.value == '∆') //Hints
+                else if(minerStart && userChoice == ConsoleKey.H && player.hintsLeft>0 && mayorStart && player.currentSquare.value == '∆') //Hints
                 {
                     player.hintsLeft--;
                     Console.Write(Miner.GetPrompt($"Quest{stepCount+1}"));
                     Console.WriteLine($" You have {player.hintsLeft} hints left!");
                 }
-                else if(minerStart && userChoice == "h" && player.hintsLeft==0 && player.currentSquare.value == '∆')
+                else if(minerStart && userChoice == ConsoleKey.H && player.hintsLeft==0 && player.currentSquare.value == '∆')
+                {
                     Console.WriteLine(Miner.GetPrompt("Exceed"));
+                }
                 else if(mayorStart)
                 {
-                    if(buildingCount<player.currentBuilding.number && userChoice == "b" && player.currentBuilding != null && player.currentSquare.value == '♦')
+                    if(buildingCount<player.currentBuilding.number && userChoice == ConsoleKey.B && player.currentBuilding != null && player.currentSquare.value == '♦')
                     {
                         if (player.wood >= player.currentBuilding.resources[0] && player.stone >= player.currentBuilding.resources[1])
-                            {
-                                player.currentSquare.value = player.currentBuilding.symbol;
-                                player.wood -= player.currentBuilding.resources[0];
-                                player.stone -= player.currentBuilding.resources[1];
-                                buildingCount++;
-                            }
+                        {
+                            player.currentSquare.value = player.currentBuilding.symbol;
+                            player.wood -= player.currentBuilding.resources[0];
+                            player.stone -= player.currentBuilding.resources[1];
+                            buildingCount++;
+                        }
                         else
-                            {
-                                Console.WriteLine("Not enough resources!");
-                            }
-
+                        {
+                            Console.WriteLine("Not enough resources!");
+                        }
                         if (buildingCount==player.currentBuilding.number) 
                         {
                             Quests.CompleteQuest(map, player, Mayor, running);
@@ -149,7 +162,11 @@ namespace WorldOfZuul
                             Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}({buildingCount}/{player.currentBuilding.number})");
                         }
                     }
-
+                    if (player.currentSquare.value != null)
+                    {
+                        Functions.PrintUserOptions(player);
+                        Console.WriteLine($"\nWood: {player.wood} \nStone: {player.stone}");
+                    }
                     map.Print(player.currentCoords);
                 }
             }

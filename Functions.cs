@@ -8,26 +8,6 @@ namespace WorldOfZuul
         }
         public static void PrintUserOptions(User player)
         { ///create inventory system +add checking inventory system here
-            if(player.currentSquare.value == 'M')
-            {
-                Console.WriteLine("Last City Mayor:"); 
-                Console.WriteLine(Program.Mayor.GetPrompt("Introduction"));
-                Console.WriteLine();
-                Console.WriteLine(Program.Mayor.GetPrompt("Quest1"));
-                Quests.StartQuest(1, player);
-                player.currentSquare.value = '♦';
-                Program.mayorStart = true;
-            }
-            if (player.currentSquare.value == '∆')
-            {
-                if (!Program.minerStart && Program.mayorStart)
-                {
-                    Console.WriteLine("Miner:");
-                    Console.WriteLine(Program.Miner.GetPrompt("Introduction"));
-                    Program.minerStart = true;
-                }
-            }
-
             Console.WriteLine("\nWhich direction do you want to go?\nD-Right\nW-Up\nA-Left\nS-Down\n\nExtra Options:\nL-Map Legend\nQ-Quit");
             
             if (Program.mayorStart)
