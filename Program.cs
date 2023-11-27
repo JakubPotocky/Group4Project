@@ -108,24 +108,27 @@ namespace WorldOfZuul
                 }
                 else if(minerStart && userChoice == "h" && player.hintsLeft==0 && player.currentSquare.value == '∆')
                     Console.WriteLine(Miner.GetPrompt("Exceed"));
-                else if(buildingCount<player.currentBuilding.number && mayorStart && userChoice == "b" && player.currentBuilding != null && player.currentSquare.value == '♦')
+                else if(mayorStart)
                 {
-                    if (player.wood >= player.currentBuilding.resources[0] && player.stone >= player.currentBuilding.resources[1])
-                        {
-                            player.currentSquare.value = player.currentBuilding.symbol;
-                            player.wood -= player.currentBuilding.resources[0];
-                            player.stone -= player.currentBuilding.resources[1];
-                            buildingCount++;
-                        }
-                    else
-                        {
-                            Console.WriteLine("Not enough resources!");
-                        }
-
-                    if (buildingCount==player.currentBuilding.number) 
+                    if(buildingCount<player.currentBuilding.number && userChoice == "b" && player.currentBuilding != null && player.currentSquare.value == '♦')
                     {
-                        Quests.CompleteQuest(map, player, Mayor, running);
-                        buildingCount=0;
+                        if (player.wood >= player.currentBuilding.resources[0] && player.stone >= player.currentBuilding.resources[1])
+                            {
+                                player.currentSquare.value = player.currentBuilding.symbol;
+                                player.wood -= player.currentBuilding.resources[0];
+                                player.stone -= player.currentBuilding.resources[1];
+                                buildingCount++;
+                            }
+                        else
+                            {
+                                Console.WriteLine("Not enough resources!");
+                            }
+
+                        if (buildingCount==player.currentBuilding.number) 
+                        {
+                            Quests.CompleteQuest(map, player, Mayor, running);
+                            buildingCount=0;
+                        }
                     }
                 }
                 else
