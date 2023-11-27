@@ -4,21 +4,22 @@ namespace WorldOfZuul
 {
     public class User
     {
-        public List<int> currentCoords = new() {2, 2}; //coordinates (x, y)
+        // Represents the current coordinates by (x, y) of the user on the map
+        public List<int> currentCoords = new() {2, 2}; 
         public Square currentSquare; //the actual current square - the Square OBJECT
-        public Map map;
-        public int hintsLeft = 3;
-        public Building? currentBuilding;
-        public int wood=100;
+        public Map map; //reference to the game map
+        public int hintsLeft = 3; //number of avaliable hints
+        public Building? currentBuilding; //what object is the user currently interacting with
+        public int wood=100; // resources held by the user
         public int stone=100;
 
         public User(Map map)
         {
-            currentSquare = map.this_map[2][2];
+            currentSquare = map.this_map[2][2]; //starting position on the map
             this.map = map;
         }
         
-        public void ChangeCoords(int x, int y)
+        public void ChangeCoords(int x, int y) //updating user's location
         {
             currentCoords[0] += y;
             currentCoords[1] += x;
@@ -30,7 +31,7 @@ namespace WorldOfZuul
             switch (direction)
             {
                 case 'd':
-                    if (currentCoords[1] + 1 != map.this_map[1].Count) // 10 = map max X
+                    if (currentCoords[1] + 1 != map.this_map[1].Count) // 10 = map max X //if within map boundaries
                         ChangeCoords(1, 0);
                     else
                         Console.WriteLine("You can't go there!");
@@ -48,7 +49,7 @@ namespace WorldOfZuul
                         Console.WriteLine("You can't go there!");
                     break;
                 case 's':
-                    if (currentCoords[0] + 1 != map.this_map.Count) // 10 = map max Y 
+                    if (currentCoords[0] + 1 != map.this_map.Count) // 10 = map max Y //if within map boundaries
                         ChangeCoords(0, 1);
                     else
                         Console.WriteLine("You can't go there!");
@@ -56,7 +57,7 @@ namespace WorldOfZuul
             }
         }
         
-        public void Move(char direction, int steps)
+        public void Move(char direction, int steps) //User movement control
         {
             switch (direction)
             {

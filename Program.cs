@@ -6,6 +6,7 @@ namespace WorldOfZuul
 {
     public class Program
     {
+        // Define non-player characters (NPSs) and game variables
         public static NPC Mayor = new("Mayor", MayorPrompts.Prompts);
         public static NPC Miner = new("Miner", MinerPrompts.Prompts);
         public static bool mayorStart = false;
@@ -16,28 +17,29 @@ namespace WorldOfZuul
         public static bool running = true;
         public static void Main()
         {
+            //Define resources
             int plusWood = 5; // *5 for delete
             int plusStone = 5;
 
             //string[] NPCprompts = File.ReadAllLines("NPCprompts/");
-            
+            //Create map game and choose its size
             Map map = new();
             int xSize = 10; //10
             int ySize = 10;
             
             map.Initialize(ySize, xSize);
-
+            // Character creation
             User player = new(map);
-            // Welcome to the game
+            // Welcome message to the game
             Console.WriteLine("Welcome to EcoCity: Building a Sustainable Future! Your goal is to make the city as sustainable as possible. Start by exploring the map and finding the last city mayor. Good luck!");
             Functions.PrintUserOptions(player);
             map.Print(player.currentCoords);
             
             ConsoleKeyInfo keyInfo;
-
+            //Main game loop
             while (running)
             {
-                keyInfo = Console.ReadKey();
+                keyInfo = Console.ReadKey(); //Read user input
                 //create a new funciton that checks what square is player standing on and gives him choices to make
                 Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); // for better visualization
 
@@ -53,12 +55,12 @@ namespace WorldOfZuul
                     Console.WriteLine("Error! The application crashed!");
                     continue;
                 }
-                else if (userChoice == ConsoleKey.Q) //Quit Game
+                else if (userChoice == ConsoleKey.Q) //Possibility to quit the game
                 {
                     running = false;
                 }
 
-                //here 
+                //Player control options (up, down, left, right inside the game)
 
                 else if (userChoice == ConsoleKey.W || userChoice == ConsoleKey.A || userChoice == ConsoleKey.S || userChoice == ConsoleKey.D || userChoice == ConsoleKey.UpArrow || userChoice == ConsoleKey.DownArrow || userChoice == ConsoleKey.LeftArrow || userChoice == ConsoleKey.RightArrow) //Movement
                 {
@@ -71,7 +73,7 @@ namespace WorldOfZuul
                     if(userChoice == ConsoleKey.D || userChoice == ConsoleKey.RightArrow)
                     {player.Move('d');}
                     
-                    if(!mayorStart && player.currentSquare.value == 'M')
+                    if(!mayorStart && player.currentSquare.value == 'M') //introduce tha mayor and start the quest
                     {
                         Console.WriteLine("Last City Mayor:"); 
                         Console.WriteLine(Program.Mayor.GetPrompt("Introduction"));
@@ -81,7 +83,7 @@ namespace WorldOfZuul
                         player.currentSquare.value = '♦';
                         Program.mayorStart = true;
                     }
-                    if (!minerStart && player.currentSquare.value == '∆')
+                    if (!minerStart && player.currentSquare.value == '∆') //Introduce the minor after meeting the mayor
                     {
                         if (!Program.minerStart && Program.mayorStart)
                         {
@@ -149,7 +151,7 @@ namespace WorldOfZuul
                     Console.WriteLine("Error! Incorrect input!");
                 }
                 if (running && stepCount<stepAmount)
-                {
+                { //Display map and game information
                     if(mayorStart)
                     {
                         Console.WriteLine($"Progress: {stepCount*100/stepAmount}%");
@@ -175,4 +177,3 @@ namespace WorldOfZuul
 }
 /// -> give more options to player that is based on current square ...
 /// VALIDATE INPUT ✔️ 
-/// hi :D

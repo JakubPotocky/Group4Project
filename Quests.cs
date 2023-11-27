@@ -1,8 +1,8 @@
 namespace WorldOfZuul
 {
-    public class Quests
+    public class Quests //class for quests and associated promts
     {
-        private static readonly Dictionary<string, string> _Prompts = new()
+        private static readonly Dictionary<string, string> _Prompts = new() //stores quests promts
         {   
             ["Quest1"]= "Build 5 houses",
             ["Quest2"]= "Build a market",
@@ -24,9 +24,10 @@ namespace WorldOfZuul
             ["Quest18"]= "Build 10 houses",
             ["Quest19"]= "Build a shopping mall",
             ["Quest20"]= "Build a stadium"
-        };
+        }; //we have decided not to add, for example, the bank. 
+        //in our opinion, it would be difficult and requires payment development 
         private static readonly Dictionary<int, Building> buildingForQuest = new()
-        {
+        { // Dictionary linking quest numbers to corresponding building objects
             [1]= new House("House", 5, new List<int>{5,5}, 5, 10),
             [2]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 5, 5, null),
             [3]= new House("House", 5, new List<int>{5,5}, 5, 10),
@@ -64,13 +65,14 @@ namespace WorldOfZuul
         public static void CompleteQuest(Map map, User player, NPC Mayor, bool running)
         {
             Program.stepCount++;
+            // Check if there are more quests to continue or if the game is over
             if(Program.stepCount < Program.stepAmount)
-            {
+            { //Promt for the next quest
                 Console.WriteLine(Mayor.GetPrompt($"Quest{Program.stepCount+1}"));
                 StartQuest(Program.stepCount+1, player);
             }
             else
-            {
+            { //Show game results and farewell message
                 Console.WriteLine(Mayor.GetPrompt("Goodbye"));
                 Console.WriteLine("Here's how your city looked at the end: ");
                 map.Print(null);
