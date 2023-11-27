@@ -137,7 +137,14 @@ namespace WorldOfZuul
                     if(mayorStart)
                     {
                         Console.WriteLine($"Progress: {stepCount*100/stepAmount}%");
-                        Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}");
+                        if (player.currentBuilding.number == 1)
+                        {
+                            Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}({buildingCount}/{player.currentBuilding.number})");
+                        }
                     }
 
                     map.Print(player.currentCoords);

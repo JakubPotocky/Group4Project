@@ -74,6 +74,6 @@ namespace WorldOfZuul
                     humanHouse.survivabilityIndex += this.impact;
                 }
             }
-     }
+        }
     }
 }
