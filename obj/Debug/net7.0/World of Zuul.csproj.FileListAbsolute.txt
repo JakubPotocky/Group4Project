@@ -96,3 +96,17 @@ C:\Users\stefa\OneDrive\Desktop\lol\Group4Project\obj\Debug\net7.0\refint\World 
 C:\Users\stefa\OneDrive\Desktop\lol\Group4Project\obj\Debug\net7.0\World of Zuul.pdb
 C:\Users\stefa\OneDrive\Desktop\lol\Group4Project\obj\Debug\net7.0\World of Zuul.genruntimeconfig.cache
 C:\Users\stefa\OneDrive\Desktop\lol\Group4Project\obj\Debug\net7.0\ref\World of Zuul.dll
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\bin\Debug\net7.0\World of Zuul.exe
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\bin\Debug\net7.0\World of Zuul.deps.json
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\bin\Debug\net7.0\World of Zuul.runtimeconfig.json
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\bin\Debug\net7.0\World of Zuul.dll
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\bin\Debug\net7.0\World of Zuul.pdb
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\obj\Debug\net7.0\World of Zuul.GeneratedMSBuildEditorConfig.editorconfig
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\obj\Debug\net7.0\World of Zuul.AssemblyInfoInputs.cache
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\obj\Debug\net7.0\World of Zuul.AssemblyInfo.cs
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\obj\Debug\net7.0\World of Zuul.csproj.CoreCompileInputs.cache
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\obj\Debug\net7.0\World of Zuul.dll
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\obj\Debug\net7.0\refint\World of Zuul.dll
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\obj\Debug\net7.0\World of Zuul.pdb
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\obj\Debug\net7.0\World of Zuul.genruntimeconfig.cache
+D:\DK\DK studies\SDU\Semester Project\Group4Project\Group4Project-1\obj\Debug\net7.0\ref\World of Zuul.dll
