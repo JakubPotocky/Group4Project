@@ -61,7 +61,6 @@ namespace WorldOfZuul
         public static void StartQuest(int questNum, User player)
         {
             player.currentBlueprint = blueprintForQuest[questNum];
-            Console.WriteLine($"Gave the user blueprint: {blueprintForQuest[questNum].symbol}");
         }
         public static void CompleteQuest(Map map, User player, NPC Mayor, bool running)
         {
@@ -78,7 +77,7 @@ namespace WorldOfZuul
                 Console.WriteLine("Here's how your city looked at the end: ");
                 map.Print(null);
                 Functions.ImpactBuildings(map);
-                float houseScore = Functions.CalculateHouseScore();
+                int houseScore = Functions.CalculateHouseScore();
                 Console.WriteLine($"Final score: {houseScore}");//for now
                 Program.running=false;
             }

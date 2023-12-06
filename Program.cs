@@ -129,7 +129,6 @@ namespace WorldOfZuul
                 }
                 else if(mayorStart)
                 {
-                    Console.WriteLine(player.currentBlueprint.symbol);
                     if(buildingCount<player.currentBlueprint.count && userChoice == ConsoleKey.B && player.currentSquare.value == '♦')
                     {
                         if (player.wood >= player.currentBlueprint.resources[0] && player.stone >= player.currentBlueprint.resources[1])

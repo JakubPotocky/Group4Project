@@ -63,15 +63,14 @@ namespace WorldOfZuul
                 industrial.ImpactHouses(map);
             }
         }
-        public static float CalculateHouseScore()
+        public static int CalculateHouseScore()
         {
-            float score = 0;
-            foreach (House house in House.all)
+            float score = 0f;
+            foreach (House house in House.all.Values)
             {
-                score += (1 - 1/house.survivabilityIndex) * house.inhabitants;
-                Console.WriteLine(house.survivabilityIndex);
+                score += (1f - 1f/house.survivabilityIndex) * house.inhabitants;
             }
-            return score;
+            return (int)score;
         }
     }
 }
