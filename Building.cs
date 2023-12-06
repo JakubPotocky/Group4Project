@@ -7,57 +7,53 @@ namespace WorldOfZuul
     public class Building
     {
         // Properties of a building
-        public static List<Building> all = new();
         public string name;
         public char symbol;
-        public int number;
-        public List<int> resources;
+        protected List<int> coordinates;
 
         // Constructor for the Building class
-        public Building (string name, char symbol, int number, List<int> resources)
+        public Building (string name, char symbol, List<int> coordinates)
         {
             this.name = name;
             this.symbol = symbol;
-            this.number = number;
-            this.resources = resources;
-            all.Add(this);
+            this.coordinates = coordinates;
         }
     }
     
     // Define a House class that inherits from Building
     public class House : Building
     {
+        public static List<House> all = new();
         public int inhabitants;
         public int survivabilityIndex; //The chances of user dying are 1/survivabilityIndex
 
         // Constructor for the House class
-        public House(string name, int number, List<int> resources, int humanCount, int survivabilityIndex) : base(name, 'l', number, resources)
+        public House(string name, List<int> coordinates, int humanCount, int survivabilityIndex) : base(name, 'l', coordinates)
         {
             this.inhabitants = humanCount;
             this.survivabilityIndex = survivabilityIndex;
+            all.Add(this);
         }
     }
 
     // Define an Industrial class that inherits from Building
     public class Industrial : Building
     {
+        public static List<Industrial> all = new();
         int range;
         int impact;
-        public List<int>? coordinates;
         // Constructor for the Industrial class
-        public Industrial(string name, char symbol, int number, List<int> resources, int range, int impact, List<int>? coordinates) : base(name, symbol, number, resources)
+        public Industrial(string name, char symbol, List<int> coordinates, int range, int impact) : base(name, symbol, coordinates)
         {
             this.range = range;
             this.impact = impact;
-            this.coordinates = coordinates;
+            all.Add(this);
         }
 
         // Method to find houses in the specified range on the map
         public List<Square> FindHousesInRange(Map map)
         {
             List<Square> houseSquares = new();
-
-            Console.WriteLine($"Building coordinates: {this.coordinates[0]}, {this.coordinates[1]}");
             // Iterate over possible rows in the range
             for (int possible_row= -this.range; possible_row<=this.range; possible_row++)
             {
@@ -74,12 +70,6 @@ namespace WorldOfZuul
                         {
                             // Access the square at the current coordinates
                             Square curr_square = map.this_map[curr_coord[1]][curr_coord[0]];
-                            if (this.symbol == 'm')
-                            {
-                                Console.WriteLine(curr_coord[0]);
-                                Console.WriteLine(curr_coord[1]);
-                                Console.WriteLine(curr_square.value);
-                            }
                             // Check if the square contains a house ('l')
                             if(curr_square.value == 'l')
                             {
@@ -90,24 +80,20 @@ namespace WorldOfZuul
                     }
                 }
             }
-
-            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-            Console.WriteLine(this.symbol);
-            Console.WriteLine(houseSquares.Count);
             return houseSquares;
         }
 
-        public void ImpactBuildings (Map map)
+        public void ImpactHouses(Map map)
+        {
+            foreach (Square house in this.FindHousesInRange(map))
             {
-                foreach (Square house in this.FindHousesInRange(map))
+                if (house.obj is House)
                 {
-                    Console.WriteLine(house.value);
-                    if (house.obj is House && house.obj != null)
-                    {
-                        House humanHouse = house.obj as House;
-                        humanHouse.survivabilityIndex += this.impact;
-                    }
+                    House humanHouse = house.obj as House;
+                    humanHouse.survivabilityIndex += this.impact;
+                    Console.WriteLine($"Current houses surv index: {humanHouse.survivabilityIndex}");
                 }
             }
         }
+    }
 }

@@ -17,6 +17,9 @@ namespace WorldOfZuul
         public static bool running = true;
         public static void Main()
         {
+            List<int> test1 = new List<int>();
+            List<int> test2 = new List<int>(); 
+
             //Define resources
             int plusWood = 5; // *5 for delete
             int plusStone = 5;
@@ -76,20 +79,20 @@ namespace WorldOfZuul
                     if(!mayorStart && player.currentSquare.value == 'M') //introduce tha mayor and start the quest
                     {
                         Console.WriteLine("Last City Mayor:"); 
-                        Console.WriteLine(Program.Mayor.GetPrompt("Introduction"));
+                        Console.WriteLine(Mayor.GetPrompt("Introduction"));
                         Console.WriteLine();
-                        Console.WriteLine(Program.Mayor.GetPrompt("Quest1"));
+                        Console.WriteLine(Mayor.GetPrompt("Quest1"));
                         Quests.StartQuest(1, player);
                         player.currentSquare.value = '♦';
-                        Program.mayorStart = true;
+                        mayorStart = true;
                     }
                     if (!minerStart && player.currentSquare.value == '∆') //Introduce the minor after meeting the mayor
                     {
-                        if (!Program.minerStart && Program.mayorStart)
+                        if (!minerStart && mayorStart)
                         {
                             Console.WriteLine("Miner:");
-                            Console.WriteLine(Program.Miner.GetPrompt("Introduction"));
-                            Program.minerStart = true;
+                            Console.WriteLine(Miner.GetPrompt("Introduction"));
+                            minerStart = true;
                         }
                     }
                 }
@@ -126,25 +129,22 @@ namespace WorldOfZuul
                 }
                 else if(mayorStart)
                 {
-                    if(buildingCount<player.currentBuilding.number && userChoice == ConsoleKey.B && player.currentBuilding != null && player.currentSquare.value == '♦')
+                    Console.WriteLine(player.currentBlueprint.symbol);
+                    if(buildingCount<player.currentBlueprint.count && userChoice == ConsoleKey.B && player.currentSquare.value == '♦')
                     {
-                        if (player.wood >= player.currentBuilding.resources[0] && player.stone >= player.currentBuilding.resources[1])
+                        if (player.wood >= player.currentBlueprint.resources[0] && player.stone >= player.currentBlueprint.resources[1])
                         {
-                            player.currentSquare.value = player.currentBuilding.symbol;
-                            player.wood -= player.currentBuilding.resources[0];
-                            player.stone -= player.currentBuilding.resources[1];
-                            if(player.currentBuilding is Industrial)
-                            {
-                                Industrial industrial = player.currentBuilding as Industrial;
-                                industrial.coordinates = player.currentCoords;
-                            }
+                            player.currentSquare.value = player.currentBlueprint.symbol;
+                            player.currentSquare.obj = player.currentBlueprint.Build(player.currentCoords);
+                            player.wood -= player.currentBlueprint.resources[0];
+                            player.stone -= player.currentBlueprint.resources[1];
                             buildingCount++;
                         }
                         else
                         {
                             Console.WriteLine("Not enough resources!");
                         }
-                        if (buildingCount==player.currentBuilding.number) 
+                        if (buildingCount==player.currentBlueprint.count) 
                         {
                             Quests.CompleteQuest(map, player, Mayor, running);
                             buildingCount=0;
@@ -160,13 +160,13 @@ namespace WorldOfZuul
                     if(mayorStart)
                     {
                         Console.WriteLine($"Progress: {stepCount*100/stepAmount}%");
-                        if (player.currentBuilding.number == 1)
+                        if (player.currentBlueprint.count == 1)
                         {
                             Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}");
                         }
                         else
                         {
-                            Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}({buildingCount}/{player.currentBuilding.number})");
+                            Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}({buildingCount}/{player.currentBlueprint.count})");
                         }
                     }
                     if (player.currentSquare.value != null)

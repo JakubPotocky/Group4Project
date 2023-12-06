@@ -26,28 +26,28 @@ namespace WorldOfZuul
             ["Quest20"]= "Build a stadium"
         }; //we have decided not to add, for example, the bank. 
         //in our opinion, it would be difficult and requires payment development 
-        private static readonly Dictionary<int, Building> buildingForQuest = new()
+        private static readonly Dictionary<int, Blueprint> blueprintForQuest = new()
         { // Dictionary linking quest numbers to corresponding building objects
-            [1]= new House("House", 5, new List<int>{5,5}, 5, 10),
-            [2]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 1, 2, null),
-            [3]= new House("House", 5, new List<int>{5,5}, 5, 10),
-            [4]= new Industrial("Workspace", 'w', 1, new List<int>{5,5}, 2, -10, null),
-            [5]= new House("House", 5,new List<int>{5,5}, 5, 10),
-            [6]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 1, 2, null),
-            [7]= new Industrial("City hall", 't', 1, new List<int>{5,5}, 2, 0, null),
-            [8]= new House("House", 5, new List<int>{5,5}, 5, 10),
-            [9]= new Industrial("Hospital", 'h', 1, new List<int>{5,5}, 2, 5, null),
-            [10]= new House("House", 5, new List<int>{5,5}, 5, 10),
-            [11]= new Industrial("School", 'e', 1, new List<int>{5,5}, 2, 3, null),
-            [12]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 1, 2, null),
-            [13]= new Industrial("Police department", 'p', 1, new List<int>{5,5}, 2, 4, null),
-            [14]= new Industrial("Park", 'c', 1, new List<int>{5,5}, 1, 5, null),
-            [15]= new House("House", 5, new List<int>{5,5}, 5, 10),
-            [16]= new Industrial("Fire Department", 'f', 1, new List<int>{5,5}, 2, 4, null),
-            [17]= new Industrial("Workspace", 'w', 1, new List<int>{5,5}, 2, -10, null),
-            [18]= new House("House", 10, new List<int>{5,5}, 5, 10),
-            [19]= new Industrial("Shopping mall", 'b', 1, new List<int>{5,5}, 2, 4, null),
-            [20]= new Industrial("Stadium", 's', 1, new List<int>{5,5}, 2, 3, null)
+            [1]= new HouseBlueprint("House", 'l', 5, new List<int>{5,5}, 5, 10),
+            [2]= new IndustrialBlueprint("Market", 'm', 1, new List<int>{5,5}, 1, 2),
+            [3]= new HouseBlueprint("House", 'l', 5, new List<int>{5,5}, 5, 10),
+            [4]= new IndustrialBlueprint("Workspace", 'w',  1, new List<int>{5,5}, 2, -5),
+            [5]= new HouseBlueprint("House", 'l', 5, new List<int>{5,5}, 5, 10),
+            [6]= new IndustrialBlueprint("Market", 'm',  1, new List<int>{5,5}, 1, 2),
+            [7]= new IndustrialBlueprint("City hall", 't',  1, new List<int>{5,5}, 2, 0),
+            [8]= new HouseBlueprint("House", 'l', 5, new List<int>{5,5}, 5, 10),
+            [9]= new IndustrialBlueprint("Hospital", 'h',  1, new List<int>{5,5}, 2, 5),
+            [10]= new HouseBlueprint("House", 'l', 5, new List<int>{5,5}, 5, 10),
+            [11]= new IndustrialBlueprint("School", 'e',  1, new List<int>{5,5},  2, 3),
+            [12]= new IndustrialBlueprint("Market", 'm',  1, new List<int>{5,5}, 1, 2),
+            [13]= new IndustrialBlueprint("Police department", 'p',  1, new List<int>{5,5}, 2, 4),
+            [14]= new IndustrialBlueprint("Park", 'c',  1, new List<int>{5,5}, 1, 5),
+            [15]= new HouseBlueprint("House", 'l', 5, new List<int>{5,5}, 5, 10),
+            [16]= new IndustrialBlueprint("Fire Department", 'f',  1, new List<int>{5,5}, 2, 4),
+            [17]= new IndustrialBlueprint("Workspace", 'w',  1, new List<int>{5,5}, 2, -5),
+            [18]= new HouseBlueprint("House", 'l', 10, new List<int>{5,5}, 5, 10),
+            [19]= new IndustrialBlueprint("Shopping mall", 'b',  1, new List<int>{5,5}, 2, 4),
+            [20]= new IndustrialBlueprint("Stadium", 's',  1, new List<int>{5,5}, 2, 3)
         };
 
         public static Dictionary<string, string> Prompts
@@ -60,7 +60,8 @@ namespace WorldOfZuul
 
         public static void StartQuest(int questNum, User player)
         {
-            player.currentBuilding = buildingForQuest[questNum];
+            player.currentBlueprint = blueprintForQuest[questNum];
+            Console.WriteLine($"Gave the user blueprint: {blueprintForQuest[questNum].symbol}");
         }
         public static void CompleteQuest(Map map, User player, NPC Mayor, bool running)
         {

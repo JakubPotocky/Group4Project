@@ -16,21 +16,21 @@ namespace WorldOfZuul
             
             if (Program.mayorStart)
             {
-                if (player.currentSquare.value == '♦' && player.currentBuilding != null) // Check if the player can place a building and has the required resources
+                if (player.currentSquare.value == '♦' && player.currentBlueprint != null) // Check if the player can place a building and has the required resources
                 //And has the option to place a building (check inventory) and has the resources necessary
                 {   
-                    Console.Write($"B-Place a {player.currentBuilding.name} (Resources needed: ");
-                    if (player.currentBuilding.resources[0] > 0)
+                    Console.Write($"B-Place a {player.currentBlueprint.name} (Resources needed: ");
+                    if (player.currentBlueprint.resources[0] > 0)
                     {
-                        Console.Write($"{player.currentBuilding.resources[0]} Wood");
-                        if (player.currentBuilding.resources[1] > 0)
+                        Console.Write($"{player.currentBlueprint.resources[0]} Wood");
+                        if (player.currentBlueprint.resources[1] > 0)
                         {
                             Console.Write(", ");
                         }
                     }
-                    if (player.currentBuilding.resources[1] > 0)
+                    if (player.currentBlueprint.resources[1] > 0)
                     {
-                        Console.Write($"{player.currentBuilding.resources[1]} Stone");
+                        Console.Write($"{player.currentBlueprint.resources[1]} Stone");
 
                     }
                     Console.Write(")");
@@ -58,26 +58,18 @@ namespace WorldOfZuul
         }
         public static void ImpactBuildings(Map map)
         {
-            foreach (Building building in Building.all)
+            foreach (Industrial industrial in Industrial.all)
             {
-                if (building is Industrial)
-                {
-                    Industrial industrial = building as Industrial;
-                    industrial.ImpactBuildings(map);
-                }
+                industrial.ImpactHouses(map);
             }
         }
         public static float CalculateHouseScore()
         {
             float score = 0;
-            foreach (Building building in Building.all)
+            foreach (House house in House.all)
             {
-                if (building is House)
-                {
-                    House house = building as House;
-                    score += house.survivabilityIndex * house.inhabitants;
-                    Console.WriteLine(house.survivabilityIndex);
-                }
+                score += (1 - 1/house.survivabilityIndex) * house.inhabitants;
+                Console.WriteLine(house.survivabilityIndex);
             }
             return score;
         }
