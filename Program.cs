@@ -131,6 +131,11 @@ namespace WorldOfZuul
                             player.currentSquare.value = player.currentBuilding.symbol;
                             player.wood -= player.currentBuilding.resources[0];
                             player.stone -= player.currentBuilding.resources[1];
+                            if(player.currentBuilding is Industrial)
+                            {
+                                Industrial industrial = player.currentBuilding as Industrial;
+                                industrial.coordinates = player.currentCoords;
+                            }
                             buildingCount++;
                         }
                         else

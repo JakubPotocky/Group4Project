@@ -109,7 +109,7 @@ namespace WorldOfZuul
                 {
                     if (playerPosition != null)
                     {
-                        if (row == playerPosition[0] && column == playerPosition[1])
+                        if (column == playerPosition[0] && row == playerPosition[1])
                         {
                             Console.Write("🫅  "); // Player
                         }

@@ -9,8 +9,8 @@ namespace WorldOfZuul
         public Map map;
         public int hintsLeft = 3;
         public Building? currentBuilding;
-        public int wood=100;
-        public int stone=100;
+        public int wood=266;
+        public int stone=266;
 
         public User(Map map)
         {
@@ -20,9 +20,9 @@ namespace WorldOfZuul
         
         public void ChangeCoords(int x, int y)
         {
-            currentCoords[0] += y;
-            currentCoords[1] += x;
-            currentSquare = map.this_map[currentCoords[0]][currentCoords[1]];
+            currentCoords[0] += x;
+            currentCoords[1] += y;
+            currentSquare = map.this_map[currentCoords[1]][currentCoords[0]];
         }
 
         public void Move(char direction)
@@ -30,25 +30,25 @@ namespace WorldOfZuul
             switch (direction)
             {
                 case 'd':
-                    if (currentCoords[1] + 1 != map.this_map[1].Count) // 10 = map max X
+                    if (currentCoords[0] + 1 != map.this_map[0].Count) // 10 = map max X
                         ChangeCoords(1, 0);
                     else
                         Console.WriteLine("You can't go there!");
                     break;
                 case 'a':
-                    if (currentCoords[1] != 0)
+                    if (currentCoords[0] != 0)
                         ChangeCoords(-1, 0);
                     else
                         Console.WriteLine("You can't go there!");
                     break;
                 case 'w':
-                    if (currentCoords[0] != 0)
+                    if (currentCoords[1] != 0)
                         ChangeCoords(0, -1);
                     else
                         Console.WriteLine("You can't go there!");
                     break;
                 case 's':
-                    if (currentCoords[0] + 1 != map.this_map.Count) // 10 = map max Y 
+                    if (currentCoords[1] + 1 != map.this_map.Count) // 10 = map max Y 
                         ChangeCoords(0, 1);
                     else
                         Console.WriteLine("You can't go there!");

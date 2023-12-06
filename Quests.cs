@@ -28,25 +28,25 @@ namespace WorldOfZuul
         private static readonly Dictionary<int, Building> buildingForQuest = new()
         {
             [1]= new House("House", 5, new List<int>{5,5}, 5, 10),
-            [2]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 5, 5, null),
+            [2]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 1, 2, null),
             [3]= new House("House", 5, new List<int>{5,5}, 5, 10),
-            [4]= new Industrial("Workspace", 'w', 1, new List<int>{5,5}, 5, 5, null),
+            [4]= new Industrial("Workspace", 'w', 1, new List<int>{5,5}, 2, -10, null),
             [5]= new House("House", 5,new List<int>{5,5}, 5, 10),
-            [6]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 5, 5, null),
-            [7]= new Industrial("City hall", 't', 1, new List<int>{5,5}, 5, 5, null),
+            [6]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 1, 2, null),
+            [7]= new Industrial("City hall", 't', 1, new List<int>{5,5}, 2, 0, null),
             [8]= new House("House", 5, new List<int>{5,5}, 5, 10),
-            [9]= new Industrial("Hospital", 'h', 1, new List<int>{5,5}, 5, 5, null),
+            [9]= new Industrial("Hospital", 'h', 1, new List<int>{5,5}, 2, 5, null),
             [10]= new House("House", 5, new List<int>{5,5}, 5, 10),
-            [11]= new Industrial("School", 'e', 1, new List<int>{5,5}, 5, 5, null),
-            [12]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 5, 5, null),
-            [13]= new Industrial("Police department", 'p', 1, new List<int>{5,5}, 5, 5, null),
-            [14]= new Industrial("Park", 'c', 1, new List<int>{5,5}, 5, 5, null),
+            [11]= new Industrial("School", 'e', 1, new List<int>{5,5}, 2, 3, null),
+            [12]= new Industrial("Market", 'm', 1, new List<int>{5,5}, 1, 2, null),
+            [13]= new Industrial("Police department", 'p', 1, new List<int>{5,5}, 2, 4, null),
+            [14]= new Industrial("Park", 'c', 1, new List<int>{5,5}, 1, 5, null),
             [15]= new House("House", 5, new List<int>{5,5}, 5, 10),
-            [16]= new Industrial("Fire Department", 'f', 1, new List<int>{5,5}, 5, 5, null),
-            [17]= new Industrial("Workspace", 'w', 1, new List<int>{5,5}, 5, 5, null),
-            [18]= new House("House", 5, new List<int>{5,5}, 5, 10),
-            [19]= new Industrial("Shopping mall", 'b', 1, new List<int>{5,5}, 5, 5, null),
-            [20]= new Industrial("Stadium", 's', 1, new List<int>{5,5}, 5, 5, null)
+            [16]= new Industrial("Fire Department", 'f', 1, new List<int>{5,5}, 2, 4, null),
+            [17]= new Industrial("Workspace", 'w', 1, new List<int>{5,5}, 2, -10, null),
+            [18]= new House("House", 10, new List<int>{5,5}, 5, 10),
+            [19]= new Industrial("Shopping mall", 'b', 1, new List<int>{5,5}, 2, 4, null),
+            [20]= new Industrial("Stadium", 's', 1, new List<int>{5,5}, 2, 3, null)
         };
 
         public static Dictionary<string, string> Prompts
@@ -74,7 +74,9 @@ namespace WorldOfZuul
                 Console.WriteLine(Mayor.GetPrompt("Goodbye"));
                 Console.WriteLine("Here's how your city looked at the end: ");
                 map.Print(null);
-                Console.WriteLine("Final score: 100/100");
+                Functions.ImpactBuildings(map);
+                float houseScore = Functions.CalculateHouseScore();
+                Console.WriteLine($"Final score: {houseScore}");//for now
                 Program.running=false;
             }
         }

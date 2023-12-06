@@ -50,5 +50,30 @@ namespace WorldOfZuul
                 Console.WriteLine("H - Ask mineman for hint");
             }
         }
+        public static void ImpactBuildings(Map map)
+        {
+            foreach (Building building in Building.all)
+            {
+                if (building is Industrial)
+                {
+                    Industrial industrial = building as Industrial;
+                    industrial.ImpactBuildings(map);
+                }
+            }
+        }
+        public static float CalculateHouseScore()
+        {
+            float score = 0;
+            foreach (Building building in Building.all)
+            {
+                if (building is House)
+                {
+                    House house = building as House;
+                    score += house.survivabilityIndex * house.inhabitants;
+                    Console.WriteLine(house.survivabilityIndex);
+                }
+            }
+            return score;
+        }
     }
 }
