@@ -63,14 +63,47 @@ namespace WorldOfZuul
                 industrial.ImpactHouses(map);
             }
         }
-        public static int CalculateHouseScore()
+        public static float CalculateHouseScore()
         {
             float score = 0f;
             foreach (House house in House.all.Values)
             {
                 score += (1f - 1f/house.survivabilityIndex) * house.inhabitants;
             }
-            return (int)score;
+            return score;
+        }
+        public static float CalculateHallImpact()
+        {
+            foreach(Industrial industrial in Industrial.all)
+            {
+                if(industrial.name == "City hall")
+                {
+                    List<int> coords = industrial.coordinates;
+                    if(Enumerable.Range(4, 2).Contains(coords[0]) && Enumerable.Range(4, 2).Contains(coords[1]))
+                    {
+                        return 1.1f;
+                    }
+                    else if(Enumerable.Range(3, 4).Contains(coords[0]) && Enumerable.Range(3, 4).Contains(coords[1]))
+                    {
+                        return 1f;
+                    }
+                    else if(Enumerable.Range(2, 6).Contains(coords[0]) && Enumerable.Range(2, 6).Contains(coords[1]))
+                    {
+                        Console.WriteLine(0.9f);
+                        return 0.9f;
+                    }
+                    else if(Enumerable.Range(1, 8).Contains(coords[0]) && Enumerable.Range(1, 8).Contains(coords[1]))
+                    {
+                        Console.WriteLine(0.8f);
+                        return 0.8f;
+                    }
+                    else
+                    {
+                        return 0.7f;
+                    }
+                }
+            }
+            return 1f;
         }
     }
 }

@@ -77,8 +77,11 @@ namespace WorldOfZuul
                 Console.WriteLine("Here's how your city looked at the end: ");
                 map.Print(null);
                 Functions.ImpactBuildings(map);
-                int houseScore = Functions.CalculateHouseScore();
-                Console.WriteLine($"Final score: {houseScore}");//for now
+                float finalScore = 0;
+                float houseScore = Functions.CalculateHouseScore();
+                finalScore += houseScore;
+                finalScore *= Functions.CalculateHallImpact();
+                Console.WriteLine($"Final score: {(int)finalScore}");//for now
                 Program.running=false;
             }
         }

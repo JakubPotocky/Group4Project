@@ -10,7 +10,7 @@ namespace WorldOfZuul
         // Properties of a building
         public string name;
         public char symbol;
-        protected readonly List<int> coordinates;
+        public List<int> coordinates;
 
         // Constructor for the Building class
         public Building (string name, char symbol, List<int> coordinates)
