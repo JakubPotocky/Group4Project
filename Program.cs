@@ -296,7 +296,7 @@ namespace WorldOfZuul
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine("The Captain:");
                                 Console.ResetColor();
-                                Console.WriteLine($"Here is the iron! Pleasure doing business with you!");
+                                Console.WriteLine($"Here is the {player.extraResource}! Pleasure doing business with you!");
                             }
                             else
                             {
