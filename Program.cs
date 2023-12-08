@@ -99,7 +99,7 @@ namespace WorldOfZuul
                         if (!minerStart && mayorStart)
                         {
                             Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.WriteLine("Miner:");
+                            Console.WriteLine("John the Miner:");
                             Console.ResetColor();
                             Console.WriteLine(Miner.GetPrompt("Introduction"));
                             minerStart = true;
@@ -139,7 +139,7 @@ namespace WorldOfZuul
                     Hintcounter=stepCount+1;
                     player.hintsLeft--;
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("Miner:");
+                    Console.WriteLine("John the Miner:");
                     Console.ResetColor();
                     Console.Write(Miner.GetPrompt($"Quest{stepCount+1}"));
                     Console.WriteLine($" You have {player.hintsLeft} hints left!");
@@ -147,7 +147,7 @@ namespace WorldOfZuul
                 else if(Hintcounter==stepCount+1 && minerStart && userChoice == ConsoleKey.H && player.hintsLeft>0 && mayorStart && player.currentSquare.value == '∆') //Hints
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("Miner:");
+                    Console.WriteLine("John the Miner:");
                     Console.ResetColor();
                     Console.Write(Miner.GetPrompt($"Quest{stepCount+1}"));
                     Console.WriteLine($" You have {player.hintsLeft} hints left!");
@@ -155,7 +155,7 @@ namespace WorldOfZuul
                 else if(minerStart && userChoice == ConsoleKey.H && player.hintsLeft==0 && player.currentSquare.value == '∆')
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("Miner:");
+                    Console.WriteLine("John the Miner:");
                     Console.ResetColor();
                     Console.WriteLine(Miner.GetPrompt("Exceed"));
                 }

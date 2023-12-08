@@ -8,7 +8,7 @@ namespace WorldOfZuul
         public List<int> currentCoords = new() {2, 2}; 
         public Square currentSquare; //the actual current square - the Square OBJECT
         public Map map; //reference to the game map
-        public int hintsLeft = 3; //number of avaliable hints
+        public int hintsLeft = 5; //number of avaliable hints
         public Blueprint? currentBlueprint; //what object is the user currently interacting with
         public int wood=265; // resources held by the user
         public int stone=265;

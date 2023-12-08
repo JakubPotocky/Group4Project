@@ -4,7 +4,7 @@ namespace WorldOfZuul
     {
         private static readonly Dictionary<string, string> _Prompts = new()
         {
-            ["Introduction"]= "Hi, im John the miner. I'll be helping you with 3 hints for your buildings positions, call me when you need one!",
+            ["Introduction"]= "Hi, my name is John and I am the city's miner. My friend, the last mayor, told me about you and your exceptional goal, so I'll be helping you with 5 hints for your buildings positions as I also happen know some things about sustainability, call me here at the mountains when you need one!",
             ["Exceed"]= "I've spilled all I know, and I'm drawing a blank. But don't give up! Chat with others in town or explore more!",
             ["Quest1"]= "Hey there! For cozy homes with a nice view, consider placing houses near the outskirts. Leave some space between them for a neighborly feel.",
             ["Quest2"]= "The market's heart should be close to the city's pulse. Find a spot near the center or close to where folks work to keep things bustling.",

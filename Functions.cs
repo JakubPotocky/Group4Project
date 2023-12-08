@@ -61,7 +61,7 @@ namespace WorldOfZuul
             if(player.currentSquare.value == '∆' && player.hintsLeft != 0 && Program.minerStart)
             {
                 Console.WriteLine("H-Ask mineman for hint");
-                Console.WriteLine("M-Repeat mayor's dialogue");
+                Console.WriteLine("M-Repeat mayor's last line");
             }
 
         }
