@@ -34,7 +34,5 @@ namespace WorldOfZuul
                 return _Prompts;
             }
         }
-
-
     }
 }

@@ -4,27 +4,29 @@ using System.Runtime.CompilerServices;
 using System.Security.Authentication.ExtendedProtection;
 
 namespace WorldOfZuul
-{
+{ 
     public class Program
     {
         // Define non-player characters (NPSs) and game variables
         public static NPC Mayor = new("Mayor", MayorPrompts.Prompts);
         public static NPC Miner = new("Miner", MinerPrompts.Prompts);
+        public static Dwarf dwarf = new("Dwarf", DwarfPrompts.Prompts);
         public static bool mayorStart = false;
         public static bool minerStart = false;
-        public static int Hintcounter = 0;
+        public static bool dwarfStart = false;
+        public static int hintCounter = 0;
         public static int stepCount = 0;
         public static int stepAmount = 20;
         public static int buildingCount = 0;
         public static bool running = true;
+        public static List<List<int>> regrowingTrees = new();
+        public static List<List<int>> regeneratingMines = new();
         public static void Main()
         {
-            List<int> test1 = new List<int>();
-            List<int> test2 = new List<int>(); 
 
             //Define resources
-            int plusWood = 5; // *5 for delete
-            int plusStone = 5;
+            int plusWood = 5;
+            int plusStone = 10;
 
             //string[] NPCprompts = File.ReadAllLines("NPCprompts/");
             //Create map game and choose its size
@@ -96,13 +98,25 @@ namespace WorldOfZuul
 
                     if (!minerStart && player.currentSquare.value == '∆') //Introduce the minor after meeting the mayor
                     {
-                        if (!minerStart && mayorStart)
+                        if (mayorStart)
                         {
                             Console.ForegroundColor = ConsoleColor.Blue;
                             Console.WriteLine("John the Miner:");
                             Console.ResetColor();
                             Console.WriteLine(Miner.GetPrompt("Introduction"));
                             minerStart = true;
+                        }
+                    }
+
+                    if(!dwarfStart && player.currentSquare.value == '♧')
+                    {
+                        if (mayorStart)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine("The Ugly Dwarf:");
+                            Console.ResetColor();
+                            Console.WriteLine(dwarf.GetPrompt("Introduction"));
+                            dwarfStart = true;
                         }
                     }
                 }
@@ -115,28 +129,42 @@ namespace WorldOfZuul
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Last City Mayor:"); 
                     Console.ResetColor();
-                    Console.WriteLine(Mayor.GetPrompt($"Quest{Program.stepCount+1}"));
+                    Console.WriteLine(Mayor.GetPrompt($"Quest{stepCount+1}"));
                 }
-                else if(userChoice == ConsoleKey.X && player.currentSquare.value == '♧') //cutting trees
+                else if(userChoice == ConsoleKey.X && player.currentSquare.value == '♧' && !Functions.ContainsEqualCoordinates(regrowingTrees, player.currentCoords)) //cutting trees
                 {
                     player.wood += plusWood;
+                    regrowingTrees.Add(new(player.currentCoords));
                 }
-                else if(userChoice == ConsoleKey.P && player.currentSquare.value == '♧') //cutting trees permanently 
+                else if(userChoice == ConsoleKey.P && player.currentSquare.value == '♧' && player.currentCoords[1] != ySize - 1&& !Functions.ContainsEqualCoordinates(regrowingTrees, player.currentCoords)) //cutting trees permanently 
                 {
                     player.currentSquare.value = '♦';
+                    foreach(List<int> tree in map.tree_coords)
+                    {
+                        if (Functions.EqualCoordinates(tree, player.currentCoords))
+                        {
+                            map.tree_coords.Remove(tree);
+                            break;
+                        }
+                    }
                     player.wood += plusWood*10;
                 }
-                // else if(userChoice == "t" && player.currentSquare.value == '♦') //planting new trees 
-                // {
-                //     player.currentSquare.value = '♧';
-                // }
-                else if(userChoice == ConsoleKey.X && player.currentSquare.value == '∆') //mining stone
+                else if ((userChoice == ConsoleKey.X || userChoice == ConsoleKey.P) && player.currentSquare.value == '♧')
+                {
+                    Console.WriteLine("This tree is currently regrowing and cannot be cut down!");
+                }
+                else if(userChoice == ConsoleKey.X && player.currentSquare.value == '∆' && !Functions.ContainsEqualCoordinates(regeneratingMines, player.currentCoords)) //mining stone
                 {
                     player.stone += plusStone;
+                    regeneratingMines.Add(new(player.currentCoords));
                 }
-                else if((Hintcounter!=stepCount+1 || Hintcounter==0) && minerStart && userChoice == ConsoleKey.H && player.hintsLeft>0 && mayorStart && player.currentSquare.value == '∆') //Hints
+                else if(userChoice == ConsoleKey.X && player.currentSquare.value == '∆')
                 {
-                    Hintcounter=stepCount+1;
+                    Console.WriteLine("The mines are currently regenerating and cannot be mined!");
+                }
+                else if((hintCounter!=stepCount+1 || hintCounter==0) && minerStart && userChoice == ConsoleKey.H && player.hintsLeft>0 && mayorStart && player.currentSquare.value == '∆') //Hints
+                {
+                    hintCounter=stepCount+1;
                     player.hintsLeft--;
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("John the Miner:");
@@ -144,7 +172,7 @@ namespace WorldOfZuul
                     Console.Write(Miner.GetPrompt($"Quest{stepCount+1}"));
                     Console.WriteLine($" You have {player.hintsLeft} hints left!");
                 }
-                else if(Hintcounter==stepCount+1 && minerStart && userChoice == ConsoleKey.H && player.hintsLeft>0 && mayorStart && player.currentSquare.value == '∆') //Hints
+                else if(hintCounter==stepCount+1 && minerStart && userChoice == ConsoleKey.H && player.hintsLeft>0 && mayorStart && player.currentSquare.value == '∆') //Hints
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("John the Miner:");
@@ -158,6 +186,31 @@ namespace WorldOfZuul
                     Console.WriteLine("John the Miner:");
                     Console.ResetColor();
                     Console.WriteLine(Miner.GetPrompt("Exceed"));
+                }
+                else if (userChoice == ConsoleKey.G && player.currentSquare.obj != null && player.shovelsLeft != 0 && dwarfStart && dwarf.buildingInShovel == null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("The Ugly Dwarf:");
+                    Console.ResetColor();
+                    Console.WriteLine(dwarf.GetPrompt($"Error{6-player.shovelsLeft}"));
+                    dwarf.buildingInShovel = player.currentSquare.obj;
+                }
+                else if (userChoice == ConsoleKey.G && player.currentSquare.obj != null && player.shovelsLeft != 0 && dwarfStart)
+                {
+                    Building currentBuilding = player.currentSquare.obj;
+                    player.currentSquare.obj = dwarf.buildingInShovel;
+                    player.currentSquare.value = dwarf.buildingInShovel.symbol;
+                    List<int> previousCoords = new(dwarf.buildingInShovel.coordinates);
+                    map.this_map[previousCoords[1]][previousCoords[0]].obj = currentBuilding;
+                    map.this_map[previousCoords[1]][previousCoords[0]].value = currentBuilding.symbol;
+                    currentBuilding.coordinates = new(dwarf.buildingInShovel.coordinates);
+                    dwarf.buildingInShovel.coordinates = new(player.currentCoords);
+                    dwarf.buildingInShovel = null;
+                    player.shovelsLeft--;
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("The Ugly Dwarf:");
+                    Console.ResetColor();
+                    Console.WriteLine($"There you go buddy! You have {player.shovelsLeft} shovels left!");
                 }
                 else if(mayorStart)
                 {

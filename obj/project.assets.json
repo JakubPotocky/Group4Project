@@ -8,26 +8,24 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\stefa\\.nuget\\packages\\": {}
+    "C:\\Users\\pauls\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\stefa\\OneDrive\\Desktop\\lol\\Group4Project\\World of Zuul.csproj",
+      "projectUniqueName": "D:\\Programming\\School\\Semester 1\\Semester Project\\Group4Project\\World of Zuul.csproj",
       "projectName": "World of Zuul",
-      "projectPath": "C:\\Users\\stefa\\OneDrive\\Desktop\\lol\\Group4Project\\World of Zuul.csproj",
-      "packagesPath": "C:\\Users\\stefa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\stefa\\OneDrive\\Desktop\\lol\\Group4Project\\obj\\",
+      "projectPath": "D:\\Programming\\School\\Semester 1\\Semester Project\\Group4Project\\World of Zuul.csproj",
+      "packagesPath": "C:\\Users\\pauls\\.nuget\\packages\\",
+      "outputPath": "D:\\Programming\\School\\Semester 1\\Semester Project\\Group4Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\stefa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\pauls\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

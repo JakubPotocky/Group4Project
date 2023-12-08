@@ -49,24 +49,47 @@ namespace WorldOfZuul
             }
 
             // Check if the player is at a square with trees
-            if (player.currentSquare.value == '♧')
+            if (player.currentSquare.value == '♧' && !ContainsEqualCoordinates(Program.regrowingTrees, player.currentCoords))
             {
-                Console.WriteLine("X-Cut down the trees\nP-Permanently cut down the trees");
+                Console.WriteLine("X-Cut down the trees");
+                if (player.currentCoords[1] != 9)
+                {
+                    Console.WriteLine("P-Permanently cut down the trees");
+                }
             }
-            else if (player.currentSquare.value == '∆')
+            else if (player.currentSquare.value == '∆' && !ContainsEqualCoordinates(Program.regeneratingMines, player.currentCoords))
             {
                 Console.WriteLine("X-Mine stone");//do we display mine man ?
             }
-            // else if (player.currentSquare.value == '♦')
-            // {
-            //     Console.WriteLine("T-Plant trees");
-            // }
+            if (player.currentSquare.obj != null && player.shovelsLeft != 0 && Program.dwarfStart)
+            {
+                Console.WriteLine("G-Call for Ugly Dwarf to move the building");
+            }
             if(player.currentSquare.value == '∆' && player.hintsLeft != 0 && Program.minerStart)
             {
                 Console.WriteLine("H-Ask mineman for hint");
                 Console.WriteLine("M-Repeat mayor's last line");
             }
 
+        }
+        public static bool ContainsEqualCoordinates(List<List<int>> containList, List<int> searchCoords)
+        {
+            foreach(List<int> coordinates in containList)
+            {
+                if(EqualCoordinates(coordinates, searchCoords))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public static bool EqualCoordinates(List<int> coords1, List<int> coords2)
+        {
+            if(coords1[0] == coords2[0] && coords1[1] == coords2[1])
+            {
+                return true;
+            }
+            return false;
         }
         public static void ImpactBuildings(Map map)
         {
@@ -75,12 +98,42 @@ namespace WorldOfZuul
                 industrial.ImpactHouses(map);
             }
         }
+        public static void TreeImpactBuildings(Map map)
+        {
+            foreach(List<int> tree_coord in map.tree_coords)
+            {
+                int tree_x = tree_coord[0];
+                int tree_y = tree_coord[1];
+                for (int i=-1;i<=1; i++)
+                {
+                    for(int j=-1;j<=1;j++)
+                    {
+                        if((i==0 || j==0) && Enumerable.Range(0, 10).Contains(tree_x + i) && Enumerable.Range(0, 10).Contains(tree_y + j))
+                        {
+                            Square square = map.this_map[tree_y+j][tree_x+i];
+                            if(square.obj is House)
+                            {
+                                House house = square.obj as House;
+                                house.survivabilityIndex += 2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         public static float CalculateHouseScore()
         {
             float score = 0f;
             foreach (House house in House.all.Values)
             {
-                score += (1f - 1f/house.survivabilityIndex) * house.inhabitants;
+                if(house.survivabilityIndex <= 1)
+                {
+                    score += 0;
+                }
+                else
+                {
+                    score += (1f - 1f/house.survivabilityIndex) * house.inhabitants;
+                }
             }
             return score;
         }
@@ -101,12 +154,10 @@ namespace WorldOfZuul
                     }
                     else if(Enumerable.Range(2, 6).Contains(coords[0]) && Enumerable.Range(2, 6).Contains(coords[1]))
                     {
-                        Console.WriteLine(0.9f);
                         return 0.9f;
                     }
                     else if(Enumerable.Range(1, 8).Contains(coords[0]) && Enumerable.Range(1, 8).Contains(coords[1]))
                     {
-                        Console.WriteLine(0.8f);
                         return 0.8f;
                     }
                     else

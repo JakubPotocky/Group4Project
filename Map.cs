@@ -3,6 +3,8 @@ namespace WorldOfZuul
 {
     public class Map
     {
+            // Initialize a list to store tree coordinates
+        public List<List<int>> tree_coords = new();
         // 2D list representing the game map
         public List<List<Square>> this_map = new(); //2d list => [[]]
  
@@ -28,7 +30,7 @@ namespace WorldOfZuul
             {
                 for (int possible_col=-1; possible_col<=1; possible_col++)
                 {
-                    List<int> curr_coord = new List<int>{central_tree_ver + possible_row, central_tree_hor + possible_col};
+                    List<int> curr_coord = new List<int>{central_tree_hor + possible_col, central_tree_ver + possible_row};
                     if (possible_row != 0 || possible_col != 0)
                     {
                         possible_tree_coords.Add(curr_coord);
@@ -36,9 +38,7 @@ namespace WorldOfZuul
                 }
             }
 
-            // Initialize a list to store tree coordinates
-            List<List<int>> tree_coords = new();
-            List<int> central_tree_coords = new(){central_tree_ver, central_tree_hor};
+            List<int> central_tree_coords = new(){central_tree_hor, central_tree_ver};
             tree_coords.Add(central_tree_coords);
             
             // Select random coordinates for additional trees
@@ -50,25 +50,22 @@ namespace WorldOfZuul
                 possible_tree_coords.RemoveAt(rndTreeIndex);
             }
 
+            for (int i = 0; i < hor; i++)
+            {
+                List<int> bottom_row_tree_coords = new() {i, ver-1};
+                tree_coords.Add(bottom_row_tree_coords);
+            }
+
             // Populate the game map with squares based on specified conditions
             for(int row=0; row<ver; row++)
             {
                 this_map.Add(new List<Square>());
                 for(int column=0; column<hor; column++)
                 {
-                    List<int> curr_coords = new() {row, column};
-
                     // Water square for the top row
                     if(row == 0)
                     {
                         Square square = new('≋'); //water
-                        this_map[row].Add(square);
-                    }
-
-                    // Tree square for the bottom row
-                    else if(row == (ver - 1))
-                    {
-                        Square square = new('♧'); //tree
                         this_map[row].Add(square);
                     }
 
@@ -85,7 +82,7 @@ namespace WorldOfZuul
                         bool found_square = false;
                         for (int z=0; z<tree_coords.Count(); z++)
                         {
-                            if (tree_coords[z][0] == row && tree_coords[z][1] == column)
+                            if (tree_coords[z][0] == column && tree_coords[z][1] == row)
                             {
                                 Square square = new('♧'); // random trees
                                 this_map[row].Add(square);

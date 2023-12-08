@@ -9,9 +9,10 @@ namespace WorldOfZuul
         public Square currentSquare; //the actual current square - the Square OBJECT
         public Map map; //reference to the game map
         public int hintsLeft = 5; //number of avaliable hints
+        public int shovelsLeft = 5;
         public Blueprint? currentBlueprint; //what object is the user currently interacting with
-        public int wood=265; // resources held by the user
-        public int stone=265;
+        public int wood=1000; // resources held by the user
+        public int stone=1000;
 
         public User(Map map)
         {

@@ -31,4 +31,9 @@ namespace WorldOfZuul
             }
         }
     }
+    public class Dwarf : NPC
+    {
+        public Building? buildingInShovel;
+        public Dwarf(string name, Dictionary<string, string> prompts) : base(name, prompts){}
+    }
 }
