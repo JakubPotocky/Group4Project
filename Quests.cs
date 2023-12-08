@@ -111,10 +111,10 @@ namespace WorldOfZuul
                 else if (200 <= (int)finalScore && (int)finalScore < 240) 
                  Console.Write("High\n");
                 else
-                 Console.Write("Very high");
+                 Console.Write("Very high\n");
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Thanks for playing! :)");
+                Console.WriteLine("\nThanks for playing! :)");
                 Console.ResetColor();
                 Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n");
                 Program.running=false;

@@ -15,6 +15,7 @@ namespace WorldOfZuul
         public static bool mayorStart = false;
         public static bool minerStart = false;
         public static bool dwarfStart = false;
+        public static bool captainStart = false;
         public static int hintCounter = 0;
         public static int stepCount = 0;
         public static int stepAmount = 20;
@@ -116,6 +117,14 @@ namespace WorldOfZuul
                             Console.WriteLine(dwarf.GetPrompt("Introduction"));
                             dwarfStart = true;
                         }
+                    }
+                    else if(!captainStart && player.currentSquare.value == 'C')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine("Captain:");
+                        Console.ResetColor();
+                        Console.WriteLine(captain.GetPrompt("Introduction"));
+                        captainStart = true;
                     }
                     else if(player.currentSquare.value == 'C')
                     {
@@ -276,23 +285,27 @@ namespace WorldOfZuul
                                 buildingCount=0;
                             }
                         }
-                    }
-                    if(userChoice == ConsoleKey.T && player.currentSquare.value == 'C' && player.currentBlueprint is IndustrialBlueprint && player.extraResource == null)
-                    {
-                        IndustrialBlueprint industrialBlueprint = player.currentBlueprint as IndustrialBlueprint;
-                        Console.WriteLine("Hello!");
-                        Console.WriteLine($"{captain.cost[$"Quest{stepCount+1}"][0]}, {captain.cost[$"Quest{stepCount+1}"][1]}");
-                        if (industrialBlueprint.extraResource != null && player.wood >= captain.cost[$"Quest{stepCount+1}"][0] && player.stone >= captain.cost[$"Quest{stepCount+1}"][1])
+                        else if(userChoice == ConsoleKey.T && player.currentSquare.value == 'C' && player.currentBlueprint is IndustrialBlueprint && player.extraResource == null)
                         {
-                            player.wood -= captain.cost[$"Quest{stepCount+1}"][0];
-                            player.stone -= captain.cost[$"Quest{stepCount+1}"][1];
-                            player.extraResource = industrialBlueprint.extraResource;
-                            Console.WriteLine($"Acquired {player.extraResource}!");
+                            IndustrialBlueprint industrialBlueprint = player.currentBlueprint as IndustrialBlueprint;
+                            if (industrialBlueprint.extraResource != null && player.wood >= captain.cost[$"Quest{stepCount+1}"][0] && player.stone >= captain.cost[$"Quest{stepCount+1}"][1])
+                            {
+                                player.wood -= captain.cost[$"Quest{stepCount+1}"][0];
+                                player.stone -= captain.cost[$"Quest{stepCount+1}"][1];
+                                player.extraResource = industrialBlueprint.extraResource;
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                Console.WriteLine("The Captain:");
+                                Console.ResetColor();
+                                Console.WriteLine($"Here is the iron! Pleasure doing business with you!");
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                Console.WriteLine("The Captain:");
+                                Console.ResetColor();
+                                Console.WriteLine("I'm sorry buddy! You don't have enough resources! No deal!");
+                            }
                         }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Error! Incorrect input!");
                     }
                 }
                 else if (userChoice == ConsoleKey.G && player.shovelsLeft != 0 && dwarfStart)

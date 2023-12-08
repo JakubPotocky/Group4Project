@@ -11,8 +11,8 @@ namespace WorldOfZuul
         public int hintsLeft = 5; //number of avaliable hints
         public int shovelsLeft = 5;
         public Blueprint? currentBlueprint; //what object is the user currently interacting with
-        public int wood=1000; // resources held by the user
-        public int stone=1000;
+        public int wood=0; // resources held by the user
+        public int stone=0;
         public string? extraResource;
 
         public User(Map map)
