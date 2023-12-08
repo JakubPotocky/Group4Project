@@ -68,11 +68,17 @@ namespace WorldOfZuul
             // Check if there are more quests to continue or if the game is over
             if(Program.stepCount < Program.stepAmount)
             { //Promt for the next quest
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Last City Mayor:"); 
+                Console.ResetColor();
                 Console.WriteLine(Mayor.GetPrompt($"Quest{Program.stepCount+1}"));
                 StartQuest(Program.stepCount+1, player);
             }
             else
             { //Show game results and farewell message
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Last City Mayor:"); 
+                Console.ResetColor();
                 Console.WriteLine(Mayor.GetPrompt("Goodbye"));
                 Console.WriteLine("Here's how your city looked at the end: ");
                 map.Print(null);
@@ -81,7 +87,14 @@ namespace WorldOfZuul
                 float houseScore = Functions.CalculateHouseScore();
                 finalScore += houseScore;
                 finalScore *= Functions.CalculateHallImpact();
-                Console.WriteLine($"Final score: {(int)finalScore}");//for now
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("Final score: ");//for now
+                Console.ResetColor();
+                Console.Write($"{(int)finalScore}\n\n");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Thanks for playing! :)");
+                Console.ResetColor();
+                Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n");
                 Program.running=false;
             }
         }

@@ -12,7 +12,14 @@ namespace WorldOfZuul
         public static void PrintUserOptions(User player)
         { 
             //create inventory system +add checking inventory system here
-            Console.WriteLine("\nWhich direction do you want to go?\nD-Right\nW-Up\nA-Left\nS-Down\n\nExtra Options:\nL-Map Legend\nQ-Quit");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nWhich direction do you want to go?");
+            Console.ResetColor();
+            Console.WriteLine("↑/W-Up\n←/A-Left\n↓/S-Down\n→/D-Right\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Extra Options:");
+            Console.ResetColor();
+            Console.WriteLine("L-Map Legend\nQ-Quit");
             
             if (Program.mayorStart)
             {
@@ -53,8 +60,10 @@ namespace WorldOfZuul
             // }
             if(player.currentSquare.value == '∆' && player.hintsLeft != 0 && Program.minerStart)
             {
-                Console.WriteLine("H - Ask mineman for hint");
+                Console.WriteLine("H-Ask mineman for hint");
+                Console.WriteLine("M-Repeat mayor's dialogue");
             }
+
         }
         public static void ImpactBuildings(Map map)
         {

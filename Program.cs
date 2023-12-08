@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Runtime.CompilerServices;
 using System.Security.Authentication.ExtendedProtection;
 
@@ -11,6 +12,7 @@ namespace WorldOfZuul
         public static NPC Miner = new("Miner", MinerPrompts.Prompts);
         public static bool mayorStart = false;
         public static bool minerStart = false;
+        public static int Hintcounter = 0;
         public static int stepCount = 0;
         public static int stepAmount = 20;
         public static int buildingCount = 0;
@@ -34,7 +36,10 @@ namespace WorldOfZuul
             // Character creation
             User player = new(map);
             // Welcome message to the game
+            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");// for better visualization
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Welcome to EcoCity: Building a Sustainable Future! Your goal is to make the city as sustainable as possible. Start by exploring the map and finding the last city mayor. Good luck!");
+            Console.ResetColor();
             Functions.PrintUserOptions(player);
             map.Print(player.currentCoords);
             
@@ -78,7 +83,9 @@ namespace WorldOfZuul
                     
                     if(!mayorStart && player.currentSquare.value == 'M') //introduce tha mayor and start the quest
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Last City Mayor:"); 
+                        Console.ResetColor();
                         Console.WriteLine(Mayor.GetPrompt("Introduction"));
                         Console.WriteLine();
                         Console.WriteLine(Mayor.GetPrompt("Quest1"));
@@ -86,11 +93,14 @@ namespace WorldOfZuul
                         player.currentSquare.value = '♦';
                         mayorStart = true;
                     }
+
                     if (!minerStart && player.currentSquare.value == '∆') //Introduce the minor after meeting the mayor
                     {
                         if (!minerStart && mayorStart)
                         {
+                            Console.ForegroundColor = ConsoleColor.Blue;
                             Console.WriteLine("Miner:");
+                            Console.ResetColor();
                             Console.WriteLine(Miner.GetPrompt("Introduction"));
                             minerStart = true;
                         }
@@ -99,6 +109,13 @@ namespace WorldOfZuul
                 else if(userChoice == ConsoleKey.L) //Legend
                 {
                     Functions.PrintMapLegend();
+                }
+                else if(mayorStart && userChoice == ConsoleKey.M && player.currentSquare.value == '∆')
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Last City Mayor:"); 
+                    Console.ResetColor();
+                    Console.WriteLine(Mayor.GetPrompt($"Quest{Program.stepCount+1}"));
                 }
                 else if(userChoice == ConsoleKey.X && player.currentSquare.value == '♧') //cutting trees
                 {
@@ -117,14 +134,29 @@ namespace WorldOfZuul
                 {
                     player.stone += plusStone;
                 }
-                else if(minerStart && userChoice == ConsoleKey.H && player.hintsLeft>0 && mayorStart && player.currentSquare.value == '∆') //Hints
+                else if((Hintcounter!=stepCount+1 || Hintcounter==0) && minerStart && userChoice == ConsoleKey.H && player.hintsLeft>0 && mayorStart && player.currentSquare.value == '∆') //Hints
                 {
+                    Hintcounter=stepCount+1;
                     player.hintsLeft--;
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Miner:");
+                    Console.ResetColor();
+                    Console.Write(Miner.GetPrompt($"Quest{stepCount+1}"));
+                    Console.WriteLine($" You have {player.hintsLeft} hints left!");
+                }
+                else if(Hintcounter==stepCount+1 && minerStart && userChoice == ConsoleKey.H && player.hintsLeft>0 && mayorStart && player.currentSquare.value == '∆') //Hints
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Miner:");
+                    Console.ResetColor();
                     Console.Write(Miner.GetPrompt($"Quest{stepCount+1}"));
                     Console.WriteLine($" You have {player.hintsLeft} hints left!");
                 }
                 else if(minerStart && userChoice == ConsoleKey.H && player.hintsLeft==0 && player.currentSquare.value == '∆')
                 {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Miner:");
+                    Console.ResetColor();
                     Console.WriteLine(Miner.GetPrompt("Exceed"));
                 }
                 else if(mayorStart)
@@ -158,20 +190,36 @@ namespace WorldOfZuul
                 { //Display map and game information
                     if(mayorStart)
                     {
-                        Console.WriteLine($"Progress: {stepCount*100/stepAmount}%");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write("\nProgress: ");
+                        Console.ResetColor();
+                        Console.Write($"{stepCount*100/stepAmount}%\n");
                         if (player.currentBlueprint.count == 1)
                         {
-                            Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write("\nCurrent quest: ");
+                            Console.ResetColor();
+                            Console.Write($"{Quests.Prompts[$"Quest{stepCount+1}"]}\n");
                         }
                         else
                         {
-                            Console.WriteLine($"Current quest: {Quests.Prompts[$"Quest{stepCount+1}"]}({buildingCount}/{player.currentBlueprint.count})");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write("\nCurrent quest: ");
+                            Console.ResetColor();
+                            Console.Write($"{Quests.Prompts[$"Quest{stepCount+1}"]}({buildingCount}/{player.currentBlueprint.count})\n");
                         }
                     }
                     if (player.currentSquare.value != null)
                     {
                         Functions.PrintUserOptions(player);
-                        Console.WriteLine($"\nWood: {player.wood} \nStone: {player.stone}");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("\n\nWood: ");
+                        Console.ResetColor();
+                        Console.Write($"{player.wood}");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("\nStone: ");
+                        Console.ResetColor();
+                        Console.Write($"{player.stone}\n");
                     }
                     map.Print(player.currentCoords);
                 }
