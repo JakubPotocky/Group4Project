@@ -24,51 +24,76 @@ namespace WorldOfZuul
             Console.ResetColor();
             Console.WriteLine("L-Map Legend\nQ-Quit");
             
-            if (Program.mayorStart)
+
+            if(Program.dwarf.buildingInShovel == null)
             {
-                if (player.currentSquare.value == '♦' && player.currentBlueprint != null) // Check if the player can place a building and has the required resources
-                //And has the option to place a building (check inventory) and has the resources necessary
-                {   
-                    Console.Write($"B-Place a {player.currentBlueprint.name} (Resources needed: ");
-                    if (player.currentBlueprint.resources[0] > 0)
-                    {
-                        Console.Write($"{player.currentBlueprint.resources[0]} Wood");
+                if (Program.mayorStart)
+                {
+                    if (player.currentSquare.value == '♦' && player.currentBlueprint != null) // Check if the player can place a building and has the required resources
+                    //And has the option to place a building (check inventory) and has the resources necessary
+                    {   
+                        Console.Write($"B-Place a {player.currentBlueprint.name} (Resources needed: ");
+                        if (player.currentBlueprint.resources[0] > 0)
+                        {
+                            Console.Write($"{player.currentBlueprint.resources[0]} Wood");
+                            if (player.currentBlueprint.resources[1] > 0)
+                            {
+                                Console.Write(", ");
+                            }
+                        }
                         if (player.currentBlueprint.resources[1] > 0)
                         {
-                            Console.Write(", ");
+                            Console.Write($"{player.currentBlueprint.resources[1]} Stone");
+
                         }
+                        if(player.currentBlueprint is IndustrialBlueprint)
+                        {
+                            IndustrialBlueprint industrialBlueprint = player.currentBlueprint as IndustrialBlueprint;
+                            if(industrialBlueprint.extraResource != null)
+                            {
+                                Console.Write($", 1 {industrialBlueprint.extraResource}");
+                            }
+                        }
+                        Console.WriteLine(")");
                     }
-                    if (player.currentBlueprint.resources[1] > 0)
-                    {
-                        Console.Write($"{player.currentBlueprint.resources[1]} Stone");
-
-                    }
-                    Console.Write(")");
                 }
-                //else if it's a building give the option to use a shovel ??????
-            }
-
-            // Check if the player is at a square with trees
-            if (player.currentSquare.value == '♧' && !ContainsEqualCoordinates(Program.regrowingTrees, player.currentCoords))
-            {
-                Console.WriteLine("X-Cut down the trees");
-                if (player.currentCoords[1] != 9)
+                // Check if the player is at a square with trees
+                if (player.currentSquare.value == '♧' && !ContainsEqualCoordinates(Program.regrowingTrees, player.currentCoords))
                 {
-                    Console.WriteLine("P-Permanently cut down the trees");
+                    Console.WriteLine("X-Cut down the trees");
+                    if (player.currentCoords[1] != 9)
+                    {
+                        Console.WriteLine("P-Permanently cut down the trees");
+                    }
+                }
+                else if (player.currentSquare.value == '∆' && !ContainsEqualCoordinates(Program.regeneratingMines, player.currentCoords))
+                {
+                    Console.WriteLine("X-Mine stone");//do we display mine man ?
+                }
+                if (player.currentSquare.obj != null && player.shovelsLeft != 0 && Program.dwarfStart)
+                {
+                    Console.WriteLine("G-Call for Ugly Dwarf to move the building");
+                }
+                if(player.currentSquare.value == '∆' && player.hintsLeft != 0 && Program.minerStart)
+                {
+                    Console.WriteLine("H-Ask mineman for hint");
+                    Console.WriteLine("M-Repeat mayor's last line");
+                }
+                if(player.currentSquare.value == 'C' && player.currentBlueprint is IndustrialBlueprint && player.extraResource == null)
+                {
+                    IndustrialBlueprint industrialBlueprint = player.currentBlueprint as IndustrialBlueprint;
+                    if(industrialBlueprint.extraResource != null)
+                    {
+                        Console.WriteLine("T-Trade with Captain");
+                    }
                 }
             }
-            else if (player.currentSquare.value == '∆' && !ContainsEqualCoordinates(Program.regeneratingMines, player.currentCoords))
+            else
             {
-                Console.WriteLine("X-Mine stone");//do we display mine man ?
-            }
-            if (player.currentSquare.obj != null && player.shovelsLeft != 0 && Program.dwarfStart)
-            {
-                Console.WriteLine("G-Call for Ugly Dwarf to move the building");
-            }
-            if(player.currentSquare.value == '∆' && player.hintsLeft != 0 && Program.minerStart)
-            {
-                Console.WriteLine("H-Ask mineman for hint");
-                Console.WriteLine("M-Repeat mayor's last line");
+                if (player.currentSquare.obj != null)
+                {
+                    Console.WriteLine("G-Place down the building");
+                }
             }
 
         }
@@ -114,7 +139,7 @@ namespace WorldOfZuul
                             if(square.obj is House)
                             {
                                 House house = square.obj as House;
-                                house.survivabilityIndex += 2;
+                                house.survivabilityIndex += 4;
                             }
                         }
                     }

@@ -118,6 +118,25 @@ namespace WorldOfZuul
             // Randomly select a square from the possible mayor coordinates and change its value to 'M'
             int mayorSquareIndex = rnd.Next(0, mayorPossibleCoords.Count);
             mayorPossibleCoords[mayorSquareIndex].changeValue('M');
+
+            int captainRow = 0;
+
+            // Initialize a list to store possible mayor coordinates
+            List<Square> captainPossibleCoords = new();
+
+            // Find possible mayor coordinates in the selected row
+            for(int captainColumn=0; captainColumn < this_map[captainRow].Count; captainColumn++)
+            {
+                Square currentSquare = this_map[captainRow][captainColumn];
+                if (currentSquare.value == '≋' )
+                {
+                    captainPossibleCoords.Add(currentSquare);
+                }
+            }
+
+            // Randomly select a square from the possible mayor coordinates and change its value to 'M'
+            int captainSquareIndex = rnd.Next(0, captainPossibleCoords.Count);
+            captainPossibleCoords[captainSquareIndex].changeValue('C');
         }
 
         public void Print(List<int>? playerPosition)
@@ -201,6 +220,10 @@ namespace WorldOfZuul
                         {
                             Console.Write("🏟️  ");
                         }
+                        else if(this_map[row][column].value=='C')
+                        {
+                            Console.Write("🚢  ");
+                        }
                         else
                             Console.Write(this_map[row][column].value);
                     }
@@ -270,6 +293,10 @@ namespace WorldOfZuul
                         else if(this_map[row][column].value=='s')
                         {
                             Console.Write("🏟️  ");
+                        }
+                        else if(this_map[row][column].value=='C')
+                        {
+                            Console.Write("🚢  ");
                         }
                         else
                             Console.Write(this_map[row][column].value);

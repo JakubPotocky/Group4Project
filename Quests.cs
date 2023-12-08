@@ -29,25 +29,25 @@ namespace WorldOfZuul
         private static readonly Dictionary<int, Blueprint> blueprintForQuest = new()
         { // Dictionary linking quest numbers to corresponding building objects
             [1]= new HouseBlueprint("House", 'l', 5, new List<int>{10,5}, 5, 10),
-            [2]= new IndustrialBlueprint("Market", 'm', 1, new List<int>{20,10}, 1, 4),
+            [2]= new IndustrialBlueprint("Market", 'm', 1, new List<int>{20,10}, 1, 4, null),
             [3]= new HouseBlueprint("House", 'l', 5, new List<int>{10,5}, 5, 10),
-            [4]= new IndustrialBlueprint("Factory", 'w',  1, new List<int>{0,25}, 2, -10),
+            [4]= new IndustrialBlueprint("Factory", 'w',  1, new List<int>{0,25}, 2, -10, "Metal"),
             [5]= new HouseBlueprint("House", 'l', 5, new List<int>{10,5}, 5, 10),
-            [6]= new IndustrialBlueprint("Market", 'm',  1, new List<int>{20,10}, 1, 4),
-            [7]= new IndustrialBlueprint("City hall", 't',  1, new List<int>{0,25}, 2, 0),
+            [6]= new IndustrialBlueprint("Market", 'm',  1, new List<int>{20,10}, 1, 4, null),
+            [7]= new IndustrialBlueprint("City hall", 't',  1, new List<int>{0,25}, 2, 0, "Metal"),
             [8]= new HouseBlueprint("House", 'l', 5, new List<int>{10,5}, 5, 10),
-            [9]= new IndustrialBlueprint("Hospital", 'h',  1, new List<int>{20,20}, 2, 10),
+            [9]= new IndustrialBlueprint("Hospital", 'h',  1, new List<int>{20,20}, 2, 10, "Metal"),
             [10]= new HouseBlueprint("House", 'l', 5, new List<int>{10,5}, 5, 10),
-            [11]= new IndustrialBlueprint("School", 'e',  1, new List<int>{25,10},  2, 6),
-            [12]= new IndustrialBlueprint("Market", 'm',  1, new List<int>{20,10}, 1, 4),
-            [13]= new IndustrialBlueprint("Police department", 'p',  1, new List<int>{20,10}, 2, 8),
-            [14]= new IndustrialBlueprint("Park", 'c',  1, new List<int>{30,0}, 1, 10),
+            [11]= new IndustrialBlueprint("School", 'e',  1, new List<int>{25,10},  2, 6, null),
+            [12]= new IndustrialBlueprint("Market", 'm',  1, new List<int>{20,10}, 1, 4, "Metal"),
+            [13]= new IndustrialBlueprint("Police department", 'p',  1, new List<int>{20,10}, 2, 8, "Metal"),
+            [14]= new IndustrialBlueprint("Park", 'c',  1, new List<int>{30,0}, 1, 10, null),
             [15]= new HouseBlueprint("House", 'l', 5, new List<int>{10,5}, 5, 10),
-            [16]= new IndustrialBlueprint("Fire Department", 'f',  1, new List<int>{10,20}, 2, 8),
-            [17]= new IndustrialBlueprint("Factory", 'w',  1, new List<int>{0,25}, 2, -10),
+            [16]= new IndustrialBlueprint("Fire Department", 'f',  1, new List<int>{10,20}, 2, 8, "Metal"),
+            [17]= new IndustrialBlueprint("Factory", 'w',  1, new List<int>{0,25}, 2, -10, "Metal"),
             [18]= new HouseBlueprint("House", 'l', 10, new List<int>{10,5}, 5, 10),
-            [19]= new IndustrialBlueprint("Shopping mall", 'b',  1, new List<int>{40,20}, 2, 8),
-            [20]= new IndustrialBlueprint("Stadium", 's',  1, new List<int>{50,25}, 2, 6)
+            [19]= new IndustrialBlueprint("Shopping mall", 'b',  1, new List<int>{40,20}, 2, 8, null),
+            [20]= new IndustrialBlueprint("Stadium", 's',  1, new List<int>{50,25}, 2, 6, "Metal")
         };
 
         public static Dictionary<string, string> Prompts
@@ -58,10 +58,11 @@ namespace WorldOfZuul
             }
         }
 
-        public static void StartQuest(int questNum, User player)
+        public static void StartQuest(int questNum, User player, NPC Mayor)
         {
             Program.regrowingTrees.Clear();
             Program.regeneratingMines.Clear();
+            player.extraResource = null;
             player.currentBlueprint = blueprintForQuest[questNum];
         }
         public static void CompleteQuest(Map map, User player, NPC Mayor, bool running)
@@ -74,7 +75,7 @@ namespace WorldOfZuul
                 Console.WriteLine("Last City Mayor:"); 
                 Console.ResetColor();
                 Console.WriteLine(Mayor.GetPrompt($"Quest{Program.stepCount+1}"));
-                StartQuest(Program.stepCount+1, player);
+                StartQuest(Program.stepCount+1, player, Mayor);
             }
             else
             { //Show game results and farewell message
@@ -98,6 +99,20 @@ namespace WorldOfZuul
                 Console.Write("Final score: ");//for now
                 Console.ResetColor();
                 Console.Write($"{(int)finalScore}\n\n");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Sustainability level: ");
+                Console.ResetColor();
+                if ((int)finalScore < 50)
+                 Console.Write("Very low\n");
+                else if (50 <= (int)finalScore && (int)finalScore < 100) 
+                 Console.Write("Low\n");
+                else if (100 <= (int)finalScore && (int)finalScore < 200) 
+                 Console.Write("Medium\n");
+                else if (200 <= (int)finalScore && (int)finalScore < 240) 
+                 Console.Write("High\n");
+                else
+                 Console.Write("Very high");
+
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Thanks for playing! :)");
                 Console.ResetColor();

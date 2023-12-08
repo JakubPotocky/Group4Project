@@ -36,4 +36,19 @@ namespace WorldOfZuul
         public Building? buildingInShovel;
         public Dwarf(string name, Dictionary<string, string> prompts) : base(name, prompts){}
     }
+    public class Captain : NPC
+    {
+        public Captain(string name, Dictionary<string, string> prompts) : base(name, prompts){}
+        public readonly Dictionary<string, List<int>> cost = new()
+        {
+            ["Quest4"]= new(){10, 10},
+            ["Quest7"]= new(){10, 10},
+            ["Quest9"]= new(){10, 10},
+            ["Quest12"]= new(){10, 10},
+            ["Quest13"]= new(){10, 10},
+            ["Quest16"]= new(){10, 10},
+            ["Quest17"]= new(){10, 10},
+            ["Quest20"]= new(){10, 10}
+        };
+    }
 }

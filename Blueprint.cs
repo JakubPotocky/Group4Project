@@ -38,10 +38,12 @@ namespace WorldOfZuul
     {
         int range;
         int impact;
-        public IndustrialBlueprint(string name, char symbol, int count, List<int> resources, int range, int impact) : base(name, symbol, count, resources)
+        public string? extraResource;
+        public IndustrialBlueprint(string name, char symbol, int count, List<int> resources, int range, int impact, string? extraResource) : base(name, symbol, count, resources)
         {
             this.range = range;
             this.impact = impact;
+            this.extraResource = extraResource;
         }
 
         public override Industrial Build(List<int> coordinates)

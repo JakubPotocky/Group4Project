@@ -13,6 +13,7 @@ namespace WorldOfZuul
         public Blueprint? currentBlueprint; //what object is the user currently interacting with
         public int wood=1000; // resources held by the user
         public int stone=1000;
+        public string? extraResource;
 
         public User(Map map)
         {
