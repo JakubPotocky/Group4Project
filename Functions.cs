@@ -5,7 +5,10 @@ namespace WorldOfZuul
         // Print the legend of symbols representing different elements on the map
         public static void PrintMapLegend()
         {//change this ?
-            Console.WriteLine("Legend:\n🫅  -Player\n🌳 -Trees\n🟩 -Plain\n🏔️  -Mines\n🌊 -Water\n👔 -Mayor\n🏠 -Houses\n🏪 -Market\n🏭 -Factory\n🏛️  -City hall\n🏥 -Hospital\n🏫 -School\n🏬 -Police department\n🏞️  -Park\n🚒 -Fire department\n💸 -Big shop\n🏟️  -Stadium\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Legend:");
+            Console.ResetColor();
+            Console.WriteLine("🫅  -Player\n🌳 -Trees\n🟩 -Plain\n🏔️  -Mountains\n🌊 -Water\n👔 -Mayor\n🏠 -Houses\n🏪 -Market\n🏭 -Factory\n🏛️  -City hall\n🏥 -Hospital\n🏫 -School\n🏬 -Police department\n🏞️  -Park\n🚒 -Fire department\n💸 -Big shop\n🏟️  -Stadium\n");
         }
 
         // Print user options based on the player's current location and game progress
