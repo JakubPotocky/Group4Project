@@ -4,7 +4,7 @@ namespace WorldOfZuul
     {
         private static readonly Dictionary<string, string> _Prompts = new()
         {
-            ["Introduction"]= "Hi, my name is John and I am the city's miner. My friend, the last mayor, told me about you and your exceptional goal, so I'll be helping you with 5 hints for buildings positions as I also happen know some things about sustainability, call me here at the mountains when you need one!",
+            ["Introduction"]= "Hi, my name is John and I am the city's miner. My friend, the last mayor, told me about you and your exceptional goal, so I'll be helping you with 5 hints for buildings positions as I also happen know some things about sustainability, call me here at the mountains when you need one! PSST! And as a good start of our friendship I'll give you a bonus tip: the trees you see in the center will have a great influence on your final score as they'll keep your city center less polluted and more green, so cut them down only if you must.",
             ["Exceed"]= "I've spilled all I know, and I'm drawing a blank. But don't give up! Chat with others in town or explore more!",
             ["Quest1"]= "Hey there! For cozy homes with a nice view, consider placing houses near the outskirts. Leave some space between them for a neighborly feel.",
             ["Quest2"]= "The market's heart should be close to the city's pulse. Find a spot near the center or close to where folks work to keep things bustling.",
@@ -12,7 +12,7 @@ namespace WorldOfZuul
             ["Quest4"]= "So, friend? I suggest you build a factory on the outskirts of the city, so it doesn't ruin the air quality and contribute to the pollution problem we've been grappling with. Our town has been a haven of clean air and clear skies, and we'd like to keep it that way.",
             ["Quest5"]= "Hey there! If you want a higher sustainability score try placing houses far from the factory, for less pollution",
             ["Quest6"]= "The market's heart should be close to the city's pulse. Find a spot near the center or close to where folks work to keep things bustling.",
-            ["Quest7"]= "City hall, the beating heart of our town! Center it all, surrounded by the market, workplaces, and schools for a well-organized city!",
+            ["Quest7"]= "City hall, the beating heart of our town! Keep in mind positioning it will influence the score greatly, so you better center it, surrounded by the markets, school, and the other main buildings for a well-organized city!",
             ["Quest8"]= "Hey there! If you want a higher sustainability score try placing houses near the market:) You see, when homes are close to the market, it encourages a more localized lifestyle. People can easily walk or bike to the market, reducing the need for cars and cutting down on harmful emissions.",
             ["Quest9"]= "For a healthy town, put the hospital close to the center. Quick access in emergencies, you know? It's all about keeping our folks safe and sound.",
             ["Quest10"]= "Hey there! If you want a higher sustainability score try placing houses near the hospital. It's not just about convenience; it's about creating a healthier, more sustainable community. When homes are close to the hospital, it means quicker access to medical care and emergency services. That alone can make a significant difference in people's lives.",

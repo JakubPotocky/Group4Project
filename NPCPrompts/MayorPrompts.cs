@@ -25,7 +25,7 @@ namespace WorldOfZuul
             ["Quest18"]= "You are crashing it! New neighbors are in town, and they need a place to crash! Build 10 more houses for our growing community!",
             ["Quest19"]= "Time for the grand finale! A shopping hall is in order, where locals and travelers alike can shop 'til they drop!",
             ["Quest20"]= "Game on! Our citizens are sports fanatics. Create a space where they can kick, throw, and score to their heart's content!",
-            ["Goodbye"]= "Alright, it's time to say our goodbyes in the game. Gotta say, you've been nailing those strategic decisions. Your town is cheering for the empire you've crafted, and not even a rocket attack can throw it off course! 😄 Citizens and I are seriously proud of what you've accomplished. Now, let's see how your sustainability score looks after all those smart moves."
+            ["Goodbye"]= "Alright, it's time to say our goodbyes. Gotta say, you've been nailing those strategic decisions. Your town is cheering for the empire you've crafted, and not even a rocket attack can throw it off course! 😄 Citizens and I are seriously proud of what you've accomplished. Now, let's see how your sustainability score looks after all those smart moves."
         };
         public static Dictionary<string, string> Prompts
         {

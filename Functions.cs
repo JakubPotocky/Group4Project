@@ -60,7 +60,7 @@ namespace WorldOfZuul
                 // Check if the player is at a square with trees
                 if (player.currentSquare.value == '♧' && !ContainsEqualCoordinates(Program.regrowingTrees, player.currentCoords))
                 {
-                    Console.WriteLine("X-Cut down the trees");
+                    Console.WriteLine("X-Harvest some wood");
                     if (player.currentCoords[1] != 9)
                     {
                         Console.WriteLine("P-Permanently cut down the trees");
