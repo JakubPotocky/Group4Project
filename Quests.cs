@@ -45,7 +45,7 @@ namespace WorldOfZuul
             [15]= new HouseBlueprint("House", 'l', 5, new List<int>{10,5}, 5, 10),
             [16]= new IndustrialBlueprint("Fire Department", 'f',  1, new List<int>{10,20}, 2, 8, "Metal"),
             [17]= new IndustrialBlueprint("Factory", 'w',  1, new List<int>{0,25}, 2, -10, "Metal"),
-            [18]= new HouseBlueprint("House", 'l', 10, new List<int>{10,5}, 5, 10),
+            [18]= new HouseBlueprint("House", 'l', 10, new List<int>{5,5}, 5, 10),
             [19]= new IndustrialBlueprint("Shopping mall", 'b',  1, new List<int>{40,20}, 2, 8, null),
             [20]= new IndustrialBlueprint("Stadium", 's',  1, new List<int>{50,25}, 2, 6, "Metal")
         };
